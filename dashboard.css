@@ -1,0 +1,90 @@
+/* dashboard.css */
+
+body {
+    background-color: #1e1e1e;
+    color: #ccc;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .navbar {
+    background-color: #262626;
+    border-bottom: 2px solid #3a3a3a;
+  }
+
+  header {
+    background-color: #1e1e1e;
+  }
+  
+  .navbar-brand,
+  .nav-link,
+  .navbar-text {
+    color: #3391ff !important;
+  }
+  
+  .navbar-nav {
+    flex-grow: 1;
+    justify-content: space-evenly;
+  }
+  
+  .navbar-nav .nav-link.disabled {
+    color: #888 !important;
+  }
+  
+  .dropdown-menu {
+    background-color: #2c2c2c;
+    border-color: #444;
+  }
+  
+  .dropdown-item {
+    color: #ccc;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  h1, h2, h3, h4 {
+    color: #3391ff;
+  }
+  
+  .beta-info {
+    color: #777;
+    font-size: 0.9rem;
+  }
+  
+  .gear-icon {
+    position: absolute;
+    bottom: 10%;
+    right: 5%;
+    opacity: 0.3;
+    max-width: 200px;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+  }
+  
+  .text-development {
+    margin-top: 3rem;
+    text-align: center;
+  }
+  
+  .text-development h2 {
+    font-weight: bold;
+  }
+  
+  .text-development p {
+    font-size: 1.2rem;
+  }
+  
+  .navbar .btn-mais-opcoes {
+    background-color: #3391ff;
+    color: #fff;
+    border: none;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .navbar .btn-mais-opcoes:hover {
+    background-color: #2a75d3;
+  }
+  
