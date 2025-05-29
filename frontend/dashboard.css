@@ -22,7 +22,7 @@ body {
   .navbar-brand,
   .nav-link,
   .navbar-text {
-    color: #3391ff !important;
+    color: #005fcc !important;
   }
   
   .navbar-nav {
@@ -49,7 +49,7 @@ body {
   }
   
   h1, h2, h3, h4 {
-    color: #3391ff;
+    color: #005fcc;
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
   }
   
