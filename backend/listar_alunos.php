@@ -1,28 +1,24 @@
 <?php
 header('Content-Type: application/json');
 
-// Inclui o arquivo de conexão
-require_once 'conexao.php'; // Certifique-se de que o caminho está correto
+require_once 'conexao.php';
 
 try {
-    // Consulta os dados da tabela tb_alunos
     $stmt = $pdo->query("
         SELECT 
-            nome, 
+            id_alunos,
+            CASE 
+                WHEN nome_social IS NOT NULL AND nome_social != '' 
+                THEN nome_social 
+                ELSE nome 
+            END AS nome,
             sobrenome, 
-            genero, 
-            DATE_FORMAT(nascimento, '%d/%m/%Y') AS data_nascimento,
-            cpf,
-            matricula,
-            email,
-            cidade,
-            uf,
-            status
+            telefone,
+            matricula
         FROM tb_alunos
     ");
 
     $alunos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
     echo json_encode($alunos);
 
 } catch (PDOException $e) {
