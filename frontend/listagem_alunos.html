@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Tabela de Usuários</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #007BFF;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Lista de Usuários</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Sobrenome</th>
+        <th>Gênero</th>
+        <th>Data Nascimento</th>
+        <th>CPF</th>
+        <th>Matrícula</th>
+        <th>Email</th>
+        <th>Cidade</th>
+        <th>UF</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="tabela-alunos">
+      <tr><td colspan="10">Carregando...</td></tr>
+    </tbody>
+  </table>
+
+  <script>
+    fetch('../backend/listar_alunos.php')
+      .then(response => {
+        if (!response.ok) throw new Error('Erro ao buscar dados');
+        return response.json();
+      })
+      .then(data => {
+        const tbody = document.getElementById('tabela-alunos');
+        tbody.innerHTML = '';
+
+        if (data.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="10">Nenhum aluno encontrado.</td></tr>';
+          return;
+        }
+
+        data.forEach(aluno => {
+          const row = document.createElement('tr');
+
+          row.innerHTML = `
+            <td>${aluno.nome}</td>
+            <td>${aluno.sobrenome}</td>
+            <td>${aluno.genero}</td>
+            <td>${aluno.data_nascimento}</td>
+            <td>${aluno.cpf}</td>
+            <td>${aluno.matricula}</td>
+            <td>${aluno.email}</td>
+            <td>${aluno.cidade}</td>
+            <td>${aluno.uf}</td>
+            <td>${aluno.status}</td>
+          `;
+
+          tbody.appendChild(row);
+        });
+      })
+      .catch(error => {
+        const tbody = document.getElementById('tabela-alunos');
+        tbody.innerHTML = `<tr><td colspan="10">Erro ao carregar dados.</td></tr>`;
+        console.error(error);
+      });
+  </script>
+
+</body>
+</html>

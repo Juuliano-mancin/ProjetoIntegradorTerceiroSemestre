@@ -51,4 +51,3 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 } else {
     echo "<h2>Acesso inválido.<h2>";
 }
-?>
