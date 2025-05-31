@@ -1,5 +1,5 @@
 <?php
-require_once 'conexao.php';
+include 'conexao.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     try {
