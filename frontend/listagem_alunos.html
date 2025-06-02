@@ -85,7 +85,7 @@
     <table class="table table-striped table-hover bg-light text-dark">
       <thead>
         <tr>
-          <th>Curso</th>
+          <th>Tipo Matrícula</th>
           <th>Nome</th>
           <th>Sobrenome</th>
           <th>Telefone</th>
@@ -106,38 +106,43 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     fetch('../backend/listar_alunos.php')
-      .then(response => {
-        if (!response.ok) throw new Error('Erro ao buscar dados');
-        return response.json();
-      })
-      .then(data => {
-        const tbody = document.getElementById('tabela-alunos');
-        tbody.innerHTML = '';
+  .then(response => {
+    if (!response.ok) throw new Error('Erro ao buscar dados');
+    return response.json();
+  })
+  .then(data => {
+    const tbody = document.getElementById('tabela-alunos');
+    tbody.innerHTML = '';
 
-        if (data.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="5">Nenhum aluno encontrado.</td></tr>';
-          return;
-        }
+    if (data.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6">Nenhum aluno encontrado.</td></tr>';
+      return;
+    }
 
-        data.forEach(aluno => {
-          const row = document.createElement('tr');
+    data.forEach(aluno => {
+      const row = document.createElement('tr');
 
-          row.innerHTML = `
-            <td>${aluno.nome}</td>
-            <td>${aluno.sobrenome}</td>
-            <td>${aluno.telefone}</td>
-             <td><a href="editar_aluno.html?id=${aluno.id_alunos}">Editar</a></td>
-          <td><button onclick="excluirAluno(${aluno.id_alunos})">Excluir</button></td>
-          `;
+      // Traduzir o tipo de matrícula para um formato mais legível
+      const tipoMatricula = aluno.tipo_matricula === 'pre_vestibular' ? 'Pré-Vestibular' : 'Regular';
 
-          tbody.appendChild(row);
-        });
-      })
-      .catch(error => {
-        const tbody = document.getElementById('tabela-alunos');
-        tbody.innerHTML = `<tr><td colspan="5">Erro ao carregar dados.</td></tr>`;
-        console.error(error);
-      });
+      row.innerHTML = `
+        <td>${tipoMatricula}</td>
+        <td>${aluno.nome}</td>
+        <td>${aluno.sobrenome}</td>
+        <td>${aluno.telefone || 'Não informado'}</td>
+        <td><a href="editar_aluno.html?id=${aluno.id_alunos}" class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i></a></td>
+        <td><button onclick="excluirAluno(${aluno.id_alunos})" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button></td>
+      `;
+
+      tbody.appendChild(row);
+    });
+  })
+  .catch(error => {
+    const tbody = document.getElementById('tabela-alunos');
+    tbody.innerHTML = '<tr><td colspan="6">Erro ao carregar dados.</td></tr>';
+    console.error(error);
+  });
+    
 
     function editarAluno(id) {
       window.location.href = `editar_aluno.html?id=${id_aluno}`;
