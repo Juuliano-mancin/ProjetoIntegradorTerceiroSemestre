@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Aluno</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .form-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .readonly {
+      background-color: #e9ecef;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Dados do Aluno</h1>
+
+  <div class="form-container" id="form-aluno">
+    Carregando dados do aluno...
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+
+    console.log("ID do aluno:", id);
+
+    if (!id) {
+      document.getElementById('form-aluno').innerHTML = '<p>ID do aluno não informado.</p>';
+    } else {
+      fetch(`/backend/detalhar_aluno.php?id=${id}`)
+        .then(response => {
+          if (!response.ok) {
+            console.error("Resposta HTTP não OK:", response.status);
+            throw new Error('Erro ao buscar dados do aluno');
+          }
+          return response.json();
+        })
+        .then(aluno => {
+          if (aluno.erro) {
+            throw new Error(aluno.erro);
+          }
+
+          const form = `
+            <div class="form-group">
+              <label>Nome:</label>
+              <input type="text" value="${aluno.nome}" class="readonly" readonly>
+            </div>
+            <div class="form-group">
+              <label>Nome Social:</label>
+              <input type="text" value="${aluno.nome_social || ''}" class="readonly" readonly>
+            </div>
+            <div class="form-group">
+              <label>Sobrenome:</label>
+              <input type="text" value="${aluno.sobrenome}" class="readonly" readonly>
+            </div>
+            <div class="form-group">
+              <label>Gênero:</label>
+              <input type="text" value="${aluno.genero}" class="readonly" readonly>
+            </div>
+            <div class="form-group">
+              <label>Data de Nascimento:</label>
+              <input type="text" value="${aluno.nascimento}" class="readonly" readonly>
+            </div>
+            <div class="form-group">
+              <label>CPF:</label>
+              <input type="text" value="${aluno.cpf}" class="readonly" readonly>
+            </div>
+            <div class="form-group">
+              <label>Matrícula:</label>
+              <input type="text" value="${aluno.matricula}" class="readonly" readonly>
+            </div>
+            <div class="form-group">
+              <label>Email:</label>
+              <input type="text" value="${aluno.email || ''}" class="readonly" readonly>
+            </div>
+            <div class="form-group">
+              <label>Cidade:</label>
+              <input type="text" value="${aluno.cidade}" class="readonly" readonly>
+            </div>
+            <div class="form-group">
+              <label>UF:</label>
+              <input type="text" value="${aluno.uf}" class="readonly" readonly>
+            </div>
+            <div class="form-group">
+              <label>Status:</label>
+              <input type="text" value="${aluno.status}" class="readonly" readonly>
+            </div>
+          `;
+
+          document.getElementById('form-aluno').innerHTML = form;
+        })
+        .catch(error => {
+          console.error("Erro completo:", error);
+          document.getElementById('form-aluno').innerHTML = '<p>Erro ao carregar dados do aluno.</p>';
+        });
+    }
+  </script>
+
+</body>
+</html>
