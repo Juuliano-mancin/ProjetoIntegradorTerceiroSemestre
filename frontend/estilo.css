@@ -1,6 +1,60 @@
 body {
     background-color: #1d1d1d;
 }
+
+header {
+    background-color: #1e1e1e;
+    border-bottom: 1px solid #3f3f3f;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: #005fcc;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+  }
+  
+  .navbar {
+    background-color: #3a3a3a;
+    border-bottom: 2px solid #3f3f3f;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  }
+  
+  .navbar-text {
+    color: #005fcc !important;
+  }
+  
+  .navbar-text span {
+    color: #ffffff !important;
+  }
+  
+  .nav-link, .dropdown-item {
+    color: #005fcc !important;
+    transition: all 0.2s ease;
+  }
+  
+  .nav-link:hover, .dropdown-item:hover {
+    color: #005fcc !important;
+  }
+  
+  .nav-link.disabled {
+    color: #4b4b4b !important;
+  }
+  
+  .dropdown-menu {
+    background-color: #2a2a2a;
+    border: 1px solid #3f3f3f;
+  }
+  
+  .dropdown-item {
+    padding: 0.5rem 1rem;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #3a3a3a;
+  }
+  
 .container {
     max-width: 1360px;
     background-color: #3a3a3a;
@@ -11,10 +65,8 @@ fieldset {
     border: 1px solid #555 !important;
     padding: 20px !important;
 }
-h1 {
-    color: #4da3ff;
-    text-shadow: 2px 8px 8px rgba(0, 0, 0, 0.699);
-}
+
+
 legend {
     color: #4da3ff;
     font-size: 18px;

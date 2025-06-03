@@ -1,0 +1,13 @@
+document.getElementById('filtro-pesquisa').addEventListener('input', function () {
+  const filtro = this.value.toLowerCase();
+  const linhas = document.querySelectorAll('#tabela-exemplo tbody tr');
+
+  linhas.forEach(linha => {
+    const textoLinha = linha.textContent.toLowerCase();
+    if (textoLinha.includes(filtro)) {
+      linha.style.display = '';
+    } else {
+      linha.style.display = 'none';
+    }
+  });
+});
