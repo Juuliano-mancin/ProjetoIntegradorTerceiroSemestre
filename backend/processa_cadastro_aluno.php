@@ -43,11 +43,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             ':status' => $_POST['status']
         ]);
 
-        echo "<h2>Aluno cadastrado com sucesso!<h2>";
+        echo '<div class="container mt-4">';
+        echo '<div class="alert alert-success" role="alert">';
+        echo '<h2>Aluno cadastrado com sucesso!</h2>';
+        echo '</div>';
+        echo '<a href="../frontend/cadastro_alunos.html" class="btn btn-primary">Voltar</a>';
+        echo '</div>';
     } catch (PDOException $e) {
         error_log("Erro ao inserir aluno: " . $e->getMessage());
-        echo "Erro ao cadastrar aluno. Verifique os dados.";
+        echo '<div class="container mt-4">';
+        echo '<div class="alert alert-danger" role="alert">';
+        echo 'Erro ao cadastrar aluno. Verifique os dados.';
+        echo '</div>';
+        echo '<a href="../frontend/cadastro_alunos.html" class="btn btn-primary">Voltar</a>';
+        echo '</div>';
     }
 } else {
-    echo "<h2>Acesso inválido.<h2>";
+    echo '<div class="container mt-4">';
+    echo '<div class="alert alert-warning" role="alert">';
+    echo '<h2>Acesso inválido.</h2>';
+    echo '</div>';
+    echo '<a href="../frontend/cadastro_alunos.html" class="btn btn-primary">Voltar</a>';
+    echo '</div>';
 }
