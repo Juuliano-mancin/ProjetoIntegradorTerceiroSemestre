@@ -1,6 +1,6 @@
 # 📚 Sistema de Gestão Acadêmica Voluntária
 
-**Solução web para automatizar a administração de cursinhos pré-vestibulares oferecidos de maneira gratuita e voluntária da escola [NOME ESCOLA]**
+**Solução web para automatizar a administração de cursinhos pré-vestibulares oferecidos de maneira gratuita e voluntária pelo Colégio Sanquim**
 
 **Instituição de Ensino:** FATEC Ogari de Castro Pacheco  
 **Município:** Itapira - São Paulo  
