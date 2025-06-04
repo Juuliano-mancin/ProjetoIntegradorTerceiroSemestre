@@ -1,135 +1,267 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Editar Aluno</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background-color: #f4f4f4;
-    }
-
-    h1 {
-      text-align: center;
-    }
-
-    .form-container {
-      max-width: 600px;
-      margin: 0 auto;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    .readonly {
-      background-color: #e9ecef;
-    }
-  </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="estilo.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
-<body>
 
-  <h1>Dados do Aluno</h1>
+<body class="text-white">
+  <header class="p-3">
+    <h1 class="fw-bold ms-3">Editar Aluno</h1>
+  </header>
 
-  <div class="form-container" id="form-aluno">
-    Carregando dados do aluno...
+  <nav class="navbar navbar-expand-lg px-3">
+    <div class="container-fluid">
+      <span class="navbar-text me-4">
+        Login: <span class="text-light"> Administrador</span>
+      </span>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 d-flex justify-content-evenly flex-wrap">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white fs-5" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <i class="bi bi-person-lines-fill me-1"></i> Alunos
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark ">
+              <li><a class="dropdown-item fs-5" href="cadastro_alunos.html"><i class="bi bi-person-plus me-2"></i>Cadastro de alunos</a></li>
+              <li><a class="dropdown-item fs-5" href="listagem_alunos.html"><i class="bi bi-search me-2"></i>Consulta de alunos</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle fs-5" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <i class="bi bi-diagram-3 me-1"></i> Turmas
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark ">
+              <li><a class="dropdown-item fs-5" href="#"><i class="bi bi-plus-square me-2"></i>Cadastro de turmas</a></li>
+              <li><a class="dropdown-item fs-5" href="#"><i class="bi bi-search me-2"></i>Consulta de turmas</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link disabled text-muted fs-5" href="#"><i class="bi bi-person-vcard me-1"></i> Professores</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link disabled text-muted fs-5" href="#"><i class="bi bi-journal-text me-1"></i> Planejamento de Aula</a>
+          </li>
+
+          <li class="nav-item d-flex align-items-center">
+            <button class="btn btn-outline-dark btn-sm fs-5" disabled>Mais Opções</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-5 mb-5 p-5 rounded">
+    <form id="form-editar-aluno" method="post" action="../backend/atualizar_aluno.php" class="row g-4">
+      <input type="hidden" id="id_alunos" name="id_alunos">
+      
+      <!-- Linha principal (Informações Pessoais + Matrícula/Status) -->
+      <div class="row align-items-stretch">
+        <!-- Coluna da Esquerda (Informações Pessoais) -->
+        <div class="col-md-7 pe-3">
+          <fieldset class="rounded h-100 mb-0">
+            <legend class="w-auto fw-bold float-none">Informações Pessoais</legend>
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <label for="nome" class="form-label">Nome:</label>
+                <input type="text" name="nome" class="form-control bg-transparent text-white border border-white" id="nome" required>
+              </div>
+              <div class="col-md-6 mb-4">
+                <label for="sobrenome" class="form-label">Sobrenome:</label>
+                <input type="text" name="sobrenome" class="form-control bg-transparent text-white border border-white" id="sobrenome" required>
+              </div>
+              <div class="col-md-6 mb-4">
+                <label for="nome_social" class="form-label">Nome Social:</label>
+                <input type="text" name="nome_social" class="form-control bg-transparent text-white border border-white" id="nome_social">
+              </div>
+              <div class="col-md-6 mb-4">
+                <label for="genero" class="form-label">Gênero:</label>
+                <select name="genero" class="form-select border border-white" id="genero" required>
+                  <option value="masculino">Masculino</option>
+                  <option value="feminino">Feminino</option>
+                  <option value="nao_binario">Não Binário</option>
+                  <option value="transgenero">Transgênero</option>
+                  <option value="outro">Outro</option>
+                  <option value="nao_informado">Não Informado</option>
+                </select>
+              </div>
+              <div class="col-md-4 mb-4">
+                <label for="nascimento" class="form-label">Nascimento:</label>
+                <input type="date" name="nascimento" class="form-control bg-transparent text-white border border-white" id="nascimento" required>
+              </div>
+              <div class="col-md-4 mb-4">
+                <label for="cpf" class="form-label">CPF:</label>
+                <input type="text" name="cpf" class="form-control bg-transparent text-white border border-white" id="cpf" placeholder="_ _ _ . _ _ _ . _ _ _ - _ _" required readonly>
+              </div>
+              <div class="col-md-4 mb-4">
+                <label for="matricula" class="form-label">Matrícula:</label>
+                <input type="text" name="matricula" class="form-control bg-transparent text-white border border-white" id="matricula" required readonly>
+              </div>
+              <div class="col-md-6 mb-4">
+                <label for="telefone" class="form-label">Contato:</label>
+                <input type="text" name="telefone" class="form-control bg-transparent text-white border border-white" placeholder="(00) 00000-0000" id="telefone">
+              </div>
+              <div class="col-md-6 mb-4">
+                <label for="email" class="form-label">E-mail:</label>
+                <input type="email" name="email" class="form-control bg-transparent text-white border border-white" placeholder="usuario@gmail.com" id="email">
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <!-- Coluna da Direita (Status + Endereço) -->
+        <div class="col-md-5 ps-3">
+          <div class="d-flex flex-column h-100">
+            <!-- Status -->
+            <fieldset class="rounded mb-4 flex-grow-1">
+              <legend class="w-auto fw-bold float-none">Status</legend>
+              <div class="mb-3">
+                <label for="status" class="form-label">Situação:</label>
+                <select name="status" class="form-select border border-white" id="status" required>
+                  <option value="ativo">Ativo</option>
+                  <option value="inativo">Inativo</option>
+                </select>
+              </div>
+            </fieldset>
+
+            <!-- Endereço -->
+            <fieldset class="rounded flex-grow-1 mb-0">
+              <legend class="w-auto fw-bold float-none">Endereço</legend>
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <label for="cep" class="form-label">CEP:</label>
+                  <input type="text" name="cep" class="form-control bg-transparent text-white border border-white" placeholder="_ _ _ _ _ - _ _ _" id="cep">
+                </div>
+                <div class="col-md-8 mb-3">
+                  <label for="logradouro" class="form-label">Logradouro:</label>
+                  <input type="text" name="logradouro" class="form-control bg-transparent text-white border border-white" id="logradouro">
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="numero" class="form-label">Número:</label>
+                  <input type="text" name="numero" class="form-control bg-transparent text-white border border-white" id="numero">
+                </div>
+                <div class="col-md-5 mb-3">
+                  <label for="complemento" class="form-label">Complemento:</label>
+                  <input type="text" name="complemento" class="form-control bg-transparent text-white border border-white" id="complemento">
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label for="bairro" class="form-label">Bairro:</label>
+                  <input type="text" name="bairro" class="form-control bg-transparent text-white border border-white" id="bairro">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="cidade" class="form-label">Cidade:</label>
+                  <input type="text" name="cidade" class="form-control bg-transparent text-white border border-white" id="cidade">
+                </div>
+                <div class="col-md-1 mb-0">
+                  <label for="uf" class="form-label">UF:</label>
+                  <input type="text" name="uf" class="form-control bg-transparent text-white border border-white" id="uf" maxlength="2">
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div> <!-- Fecha a div.row principal -->
+
+      <div class="col-12 text-end">
+        <button type="button" class="btn btn-submit px-4 py-2 me-4 fw-bold text-white" onclick="history.back()">Voltar</button>
+        <button type="submit" class="btn btn-submit px-4 py-2 fw-bold text-white">Salvar Alterações</button>
+      </div>
+    </form>
   </div>
 
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get('id');
+    document.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
 
-    console.log("ID do aluno:", id);
+      if (!id) {
+        alert('ID do aluno não informado');
+        window.location.href = 'listagem_alunos.html';
+        return;
+      }
 
-    if (!id) {
-      document.getElementById('form-aluno').innerHTML = '<p>ID do aluno não informado.</p>';
-    } else {
-      fetch(`/backend/detalhar_aluno.php?id=${id}`)
+      fetch(`../backend/detalhar_aluno.php?id=${id}`)
         .then(response => {
-          if (!response.ok) {
-            console.error("Resposta HTTP não OK:", response.status);
-            throw new Error('Erro ao buscar dados do aluno');
-          }
+          if (!response.ok) throw new Error('Erro ao buscar dados');
           return response.json();
         })
         .then(aluno => {
-          if (aluno.erro) {
-            throw new Error(aluno.erro);
-          }
-
-          const form = `
-            <div class="form-group">
-              <label>Nome:</label>
-              <input type="text" value="${aluno.nome}" class="readonly" readonly>
-            </div>
-            <div class="form-group">
-              <label>Nome Social:</label>
-              <input type="text" value="${aluno.nome_social || ''}" class="readonly" readonly>
-            </div>
-            <div class="form-group">
-              <label>Sobrenome:</label>
-              <input type="text" value="${aluno.sobrenome}" class="readonly" readonly>
-            </div>
-            <div class="form-group">
-              <label>Gênero:</label>
-              <input type="text" value="${aluno.genero}" class="readonly" readonly>
-            </div>
-            <div class="form-group">
-              <label>Data de Nascimento:</label>
-              <input type="text" value="${aluno.nascimento}" class="readonly" readonly>
-            </div>
-            <div class="form-group">
-              <label>CPF:</label>
-              <input type="text" value="${aluno.cpf}" class="readonly" readonly>
-            </div>
-            <div class="form-group">
-              <label>Matrícula:</label>
-              <input type="text" value="${aluno.matricula}" class="readonly" readonly>
-            </div>
-            <div class="form-group">
-              <label>Email:</label>
-              <input type="text" value="${aluno.email || ''}" class="readonly" readonly>
-            </div>
-            <div class="form-group">
-              <label>Cidade:</label>
-              <input type="text" value="${aluno.cidade}" class="readonly" readonly>
-            </div>
-            <div class="form-group">
-              <label>UF:</label>
-              <input type="text" value="${aluno.uf}" class="readonly" readonly>
-            </div>
-            <div class="form-group">
-              <label>Status:</label>
-              <input type="text" value="${aluno.status}" class="readonly" readonly>
-            </div>
-          `;
-
-          document.getElementById('form-aluno').innerHTML = form;
+          // Preenche o formulário com os dados do aluno
+          document.getElementById('id_alunos').value = aluno.id_alunos;
+          document.getElementById('nome').value = aluno.nome;
+          document.getElementById('nome_social').value = aluno.nome_social || '';
+          document.getElementById('sobrenome').value = aluno.sobrenome;
+          document.getElementById('genero').value = aluno.genero;
+          document.getElementById('nascimento').value = aluno.nascimento;
+          document.getElementById('cpf').value = aluno.cpf;
+          document.getElementById('matricula').value = aluno.matricula;
+          document.getElementById('telefone').value = aluno.telefone || '';
+          document.getElementById('email').value = aluno.email || '';
+          document.getElementById('status').value = aluno.status;
+          
+          // Preenche os campos de endereço
+          document.getElementById('cep').value = aluno.cep || '';
+          document.getElementById('logradouro').value = aluno.logradouro || '';
+          document.getElementById('numero').value = aluno.numero || '';
+          document.getElementById('complemento').value = aluno.complemento || '';
+          document.getElementById('bairro').value = aluno.bairro || '';
+          document.getElementById('cidade').value = aluno.cidade || '';
+          document.getElementById('uf').value = aluno.uf || '';
         })
         .catch(error => {
-          console.error("Erro completo:", error);
-          document.getElementById('form-aluno').innerHTML = '<p>Erro ao carregar dados do aluno.</p>';
+          console.error(error);
+          alert('Erro ao carregar dados do aluno');
+          window.location.href = 'listagem_alunos.html';
         });
-    }
+    });
+
+    // Adiciona o evento de submit do formulário
+    document.getElementById('form-editar-aluno').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(this);
+      const data = {};
+      formData.forEach((value, key) => data[key] = value);
+      
+      fetch(this.action, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => {
+        if (!response.ok) throw new Error('Erro na requisição');
+        return response.json();
+      })
+      .then(result => {
+        if (result.erro) {
+          throw new Error(result.erro);
+        }
+        alert('Dados atualizados com sucesso!');
+        window.location.href = 'listagem_alunos.html';
+      })
+      .catch(error => {
+        console.error(error);
+        alert(error.message || 'Erro ao atualizar aluno');
+      });
+    });
   </script>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
