@@ -2,20 +2,17 @@
 header('Content-Type: application/json');
 require_once 'conexao.php';
 
-// Verifica se é uma requisição POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['erro' => 'Método não permitido']);
     exit;
 }
 
-// Recebe os dados do formulário
 $dados = json_decode(file_get_contents('php://input'), true);
 if (!$dados) {
     $dados = $_POST;
 }
 
-// Validação básica
 if (!isset($dados['id_alunos'])) {
     http_response_code(400);
     echo json_encode(['erro' => 'ID do aluno não informado']);
@@ -23,34 +20,33 @@ if (!isset($dados['id_alunos'])) {
 }
 
 try {
-    // Prepara a query de atualização
     $stmt = $pdo->prepare("
         UPDATE tb_alunos SET
             nome = :nome,
             nome_social = :nome_social,
             sobrenome = :sobrenome,
             genero = :genero,
-            nascimento = :nascimento,
             telefone = :telefone,
             email = :email,
-            status = :status
+            cont_emergencia_nome = :cont_emergencia_nome,
+            cont_emergencia_relacao = :cont_emergencia_relacao,
+            cont_emergencia_contato = :cont_emergencia_contato
         WHERE id_alunos = :id
     ");
     
-    // Executa a atualização
     $stmt->execute([
         ':nome' => $dados['nome'],
         ':nome_social' => !empty($dados['nome_social']) ? $dados['nome_social'] : null,
         ':sobrenome' => $dados['sobrenome'],
         ':genero' => $dados['genero'],
-        ':nascimento' => $dados['nascimento'],
         ':telefone' => !empty($dados['telefone']) ? $dados['telefone'] : null,
         ':email' => !empty($dados['email']) ? $dados['email'] : null,
-        ':status' => $dados['status'],
+        ':cont_emergencia_nome' => !empty($dados['cont_emergencia_nome']) ? $dados['cont_emergencia_nome'] : null,
+        ':cont_emergencia_relacao' => $dados['cont_emergencia_relacao'] ?? 'nenhum',
+        ':cont_emergencia_contato' => !empty($dados['cont_emergencia_contato']) ? $dados['cont_emergencia_contato'] : null,
         ':id' => $dados['id_alunos']
     ]);
     
-    // Verifica se alguma linha foi afetada
     if ($stmt->rowCount() > 0) {
         echo json_encode(['sucesso' => 'Dados do aluno atualizados com sucesso']);
     } else {

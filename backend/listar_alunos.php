@@ -1,28 +1,23 @@
 <?php
 header('Content-Type: application/json');
-
 require_once 'conexao.php';
 
+$mostrarInativos = isset($_GET['todos']) && $_GET['todos'] == 1;
+
 try {
-    $stmt = $pdo->query("
-        SELECT 
-            id_alunos,
-            CASE 
-                WHEN nome_social IS NOT NULL AND nome_social != '' 
-                THEN nome_social 
-                ELSE nome 
-            END AS nome,
-            sobrenome, 
-            telefone,
-            tipo_matricula,
-            matricula
-        FROM tb_alunos
-    ");
-
+    $sql = "SELECT * FROM tb_alunos";
+    
+    if (!$mostrarInativos) {
+        $sql .= " WHERE status = 'ativo'";
+    }
+    
+    $sql .= " ORDER BY nome, sobrenome";
+    
+    $stmt = $pdo->query($sql);
     $alunos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
     echo json_encode($alunos);
-
 } catch (PDOException $e) {
     http_response_code(500);
-    echo json_encode(['erro' => 'Erro ao consultar dados: ' . $e->getMessage()]);
+    echo json_encode(['erro' => 'Erro ao consultar alunos: ' . $e->getMessage()]);
 }

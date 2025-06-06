@@ -6,97 +6,149 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Consulta de Alunos</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="consulta.css" />
+  <link rel="stylesheet" href="estilo.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" />
 </head>
 
-<body class="text-white">
+<body>
+  <!-- Modal de Detalhes do Aluno -->
+  <div class="modal fade" id="alunoModal" tabindex="-1" aria-labelledby="alunoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content border border-dark rounded"> <div class="modal-header bg-dark text-white"> <h5 class="modal-title" id="alunoModalLabel">Detalhes do Aluno</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-dark bg-light" id="alunoModalBody"> Carregando informações...
+      </div>
+      <div class="modal-footer bg-light border-top border-dark"> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
   <header class="p-3">
-    <h1 class="fw-bold ms-3">Consulta Alunos</h1>
+    <h1 class="fw-bold ms-3">Alunos Cadastrados</h1>
   </header>
 
   <nav class="navbar navbar-expand-lg px-3">
-    <div class="container-fluid">
-      <span class="navbar-text me-4">
-        Login: <span class="text-light"> Administrador</span>
-      </span>
+  <div class="container-fluid">
+    <span class="navbar-text me-4">
+      Login: <span>Administrador</span>
+    </span>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 d-flex justify-content-evenly flex-wrap">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white fs-5" href="#" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              <i class="bi bi-person-lines-fill me-1"></i> Alunos
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark ">
-              <li><a class="dropdown-item fs-5" href="cadastro_alunos.html"><i class="bi bi-person-plus me-2"></i>Cadastro de alunos</a></li>
-              <li><a class="dropdown-item fs-5" href="listagem_alunos.html"><i class="bi bi-search me-2"></i>Consulta de alunos</a></li>
-            </ul>
-          </li>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ms-auto d-flex flex-wrap justify-content-evenly w-100">
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle fs-5" href="#" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              <i class="bi bi-diagram-3 me-1"></i> Turmas
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark ">
-              <li><a class="dropdown-item fs-5" href="#"><i class="bi bi-plus-square me-2"></i>Cadastro de turmas</a></li>
-              <li><a class="dropdown-item fs-5" href="#"><i class="bi bi-search me-2"></i>Consulta de turmas</a></li>
-            </ul>
-          </li>
+        <!-- Home -->
+        <li class="nav-item">
+          <a class="nav-link fs-5" href="page_admin.html">
+            <i class="bi bi-house-door-fill me-1"></i> Home
+          </a>
+        </li>
 
-          <li class="nav-item">
-            <a class="nav-link disabled text-muted fs-5" href="#"><i class="bi bi-person-vcard me-1"></i> Professores</a>
-          </li>
+        <!-- Alunos -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle fs-5" href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <i class="bi bi-person-lines-fill me-1"></i> Alunos
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item fs-5" href="cadastro_alunos.html"><i class="bi bi-person-plus me-2"></i>Cadastro de alunos</a></li>
+            <li><a class="dropdown-item fs-5" href="listagem_alunos.html"><i class="bi bi-search me-2"></i>Consulta de alunos</a></li>
+          </ul>
+        </li>
 
-          <li class="nav-item">
-            <a class="nav-link disabled text-muted fs-5" href="#"><i class="bi bi-journal-text me-1"></i> Planejamento de Aula</a>
-          </li>
+        <!-- Turmas -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle fs-5" href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <i class="bi bi-diagram-3 me-1"></i> Turmas
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item fs-5" href="cadastro_turmas.html"><i class="bi bi-plus-square me-2"></i>Cadastro de turmas</a></li>
+            <li><a class="dropdown-item fs-5" href="listagem_turmas.html"><i class="bi bi-gear me-2"></i>Gerenciar turmas</a></li>
+          </ul>
+        </li>
 
-          <li class="nav-item d-flex align-items-center">
-            <button class="btn btn-outline-dark btn-sm fs-5" disabled>Mais Opções</button>
-          </li>
-        </ul>
-      </div>
+        <!-- Professores -->
+        <li class="nav-item">
+          <a class="nav-link disabled fs-5" href="#"><i class="bi bi-person-vcard me-1"></i> Professores</a>
+        </li>
+
+        <!-- Planejamento -->
+        <li class="nav-item">
+          <a class="nav-link disabled fs-5" href="#"><i class="bi bi-journal-text me-1"></i> Planejamento de Aula</a>
+        </li>
+
+        <!-- Mais Opções -->
+        <li class="nav-item d-flex align-items-center">
+          <button class="btn btn-custom btn-sm fs-5" disabled>Mais Opções</button>
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
 
   <main class="container my-5">
-    <h2 class="fw-bold text-center mb-4">Lista de Alunos Matriculados</h2>
+    <h2 class="fw-bold text-left mb-4">Lista de Alunos Matriculados</h2>
 
     <div class="row mb-4">
-      <div class="col-md-4 offset-md-4">
-        <input 
-          type="search" 
-          id="filtro-pesquisa" 
-          class="form-control" 
-          placeholder="Pesquisar..." 
-          aria-label="Filtro de pesquisa genérico"
-          autocomplete="off"
-        />
+      <div class="col-md-6">
+        <div class="input-group">
+          <input
+            type="search"
+            id="filtro-pesquisa"
+            class="form-control border border-dark rounded"
+            placeholder="Pesquisar..."
+            aria-label="Filtro de pesquisa genérico"
+            autocomplete="off"
+          />
+          <button class="btn btn-outline-dark border border-dark" type="button" id="btn-limpar-pesquisa" hidden>
+            <i class="bi bi-x-lg">Limpar</i>
+          </button>
+        </div>
+      </div>
+      <div class="col-md-6 d-flex align-items-center justify-content-end">
+        <div class="form-check form-switch">
+          <input class="form-check-input border border-dark" type="checkbox" id="switch-inativos">
+          <label class="form-check-label text-dark" for="switch-inativos">Mostrar inativos</label>
+        </div>
       </div>
     </div>
 
-    <table class="table table-striped table-hover bg-light text-dark">
-      <thead>
-        <tr>
-          <th>Tipo Matrícula</th>
-          <th>Nome</th>
-          <th>Sobrenome</th>
-          <th>Telefone</th>
-          <th>Editar</th>
-          <th>Excluir</th>
-        </tr>
-      </thead>
-      <tbody id="tabela-alunos">
-        <tr><td colspan="6">Carregando...</td></tr>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover bg-light text-dark border border-dark">
+        <thead>
+          <tr class="table-dark"> <th scope="col">Matrícula</th> <th scope="col">Tipo de Curso</th>
+            <th scope="col">Nome Completo</th>
+            <th scope="col">Contato</th>
+            <th scope="col">Status</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-alunos">
+          <tr><td colspan="7" class="text-center">Carregando...</td></tr> </tbody>
+      </table>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <div class="dataTables_info text-dark" id="info-paginacao" role="status" aria-live="polite">
+          Mostrando 0 de 0 registros
+        </div>
+      </div>
+      <div class="col-md-6">
+        <nav aria-label="Navegação de páginas">
+          <ul class="pagination justify-content-end" id="paginacao">
+            </ul>
+        </nav>
+      </div>
+    </div>
   </main>
 
   <a href="page_admin.html" class="btn btn-secondary position-fixed bottom-0 end-0 m-4">
@@ -105,64 +157,351 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    fetch('../backend/listar_alunos.php')
-  .then(response => {
-    if (!response.ok) throw new Error('Erro ao buscar dados');
-    return response.json();
-  })
-  .then(data => {
-    const tbody = document.getElementById('tabela-alunos');
-    tbody.innerHTML = '';
+    // Variáveis globais
+    let todosAlunos = [];
+    let alunosFiltrados = [];
+    let paginaAtual = 1;
+    const itensPorPagina = 10;
+    const alunoModal = new bootstrap.Modal(document.getElementById('alunoModal'));
 
-    if (data.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="6">Nenhum aluno encontrado.</td></tr>';
-      return;
+    // Função para calcular idade a partir da data de nascimento
+    function calcularIdade(dataNascimento) {
+      const hoje = new Date();
+      const nascimento = new Date(dataNascimento);
+      let idade = hoje.getFullYear() - nascimento.getFullYear();
+      const mes = hoje.getMonth() - nascimento.getMonth();
+      
+      if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+        idade--;
+      }
+      
+      return idade;
     }
 
-    data.forEach(aluno => {
-      const row = document.createElement('tr');
-
-      // Traduzir o tipo de matrícula para um formato mais legível
-      const tipoMatricula = aluno.tipo_matricula === 'pre_vestibular' ? 'Pré-Vestibular' : 'Regular';
-
-      row.innerHTML = `
-        <td>${tipoMatricula}</td>
-        <td>${aluno.nome}</td>
-        <td>${aluno.sobrenome}</td>
-        <td>${aluno.telefone || 'Não informado'}</td>
-        <td><a href="editar_aluno.html?id=${aluno.id_alunos}" class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i></a></td>
-        <td><button onclick="excluirAluno(${aluno.id_alunos})" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button></td>
-      `;
-
-      tbody.appendChild(row);
-    });
-  })
-  .catch(error => {
-    const tbody = document.getElementById('tabela-alunos');
-    tbody.innerHTML = '<tr><td colspan="6">Erro ao carregar dados.</td></tr>';
-    console.error(error);
-  });
-    
-
-    function editarAluno(id) {
-      window.location.href = `editar_aluno.html?id=${id_aluno}`;
+    // Função para formatar telefone
+    function formatarTelefone(telefone) {
+      if (!telefone) return 'Não informado';
+      const apenasNumeros = telefone.replace(/\D/g, '');
+      return apenasNumeros.replace(/^(\d{2})(\d{4,5})(\d{4})$/, '($1) $2-$3');
     }
 
-    function excluirAluno(matricula) {
-      if (confirm("Tem certeza que deseja excluir este aluno?")) {
-        fetch(`../backend/excluir_aluno.php?id=${id_aluno}`, { method: 'DELETE' })
-          .then(response => response.json())
-          .then(result => {
-            alert(result.mensagem || "Aluno excluído com sucesso!");
-            location.reload();
+    // Função para carregar detalhes do aluno
+    function carregarDetalhesAluno(id) {
+      fetch(`../backend/detalhes_aluno.php?id=${id}`)
+        .then(response => response.json())
+        .then(data => {
+          const modalBody = document.getElementById('alunoModalBody');
+          let html = `
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Informações Pessoais</h4>
+                <p><strong>Nome:</strong> ${data.nome}</p>
+                ${data.nome_social ? `<p><strong>Nome Social:</strong> ${data.nome_social}</p>` : ''}
+                <p><strong>Sobrenome:</strong> ${data.sobrenome}</p>
+                <p><strong>Gênero:</strong> ${data.genero.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}</p>
+                <p><strong>Nascimento:</strong> ${new Date(data.nascimento).toLocaleDateString()} (${calcularIdade(data.nascimento)} anos)</p>
+                <p><strong>CPF:</strong> ${data.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')}</p>
+                <p><strong>RG:</strong> ${data.rg}</p>
+              </div>
+              <div class="col-md-6">
+                <h4>Contato</h4>
+                <p><strong>Telefone:</strong> ${formatarTelefone(data.telefone)}</p>
+                <p><strong>E-mail:</strong> ${data.email || 'Não informado'}</p>
+                <h4 class="mt-3">Endereço</h4>
+                <p>${data.logradouro}, ${data.numero || 'S/N'}${data.complemento ? ' - ' + data.complemento : ''}</p>
+                <p>${data.bairro}, ${data.cidade} - ${data.uf}</p>
+                <p><strong>CEP:</strong> ${data.cep || 'Não informado'}</p>
+              </div>
+            </div>
+          `;
+
+          if (data.cont_emergencia_nome) {
+            html += `
+              <div class="row mt-3">
+                <div class="col-12">
+                  <h4>Contato de Emergência</h4>
+                  <p><strong>Nome:</strong> ${data.cont_emergencia_nome}</p>
+                  <p><strong>Relacionamento:</strong> ${data.cont_emergencia_relacao.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}</p>
+                  <p><strong>Contato:</strong> ${formatarTelefone(data.cont_emergencia_contato)}</p>
+                </div>
+              </div>
+            `;
+          }
+
+          html += `
+            <div class="row mt-3">
+              <div class="col-12">
+                <h4>Informações Acadêmicas</h4>
+                <p><strong>Matrícula:</strong> ${data.matricula}</p>
+                <p><strong>Tipo de Matrícula:</strong> ${data.tipo_matricula === 'pre_vestibular' ? 'Pré-Vestibular' : 'Vestibulinho'}</p>
+                <p><strong>Semestre:</strong> ${data.semestre}º</p>
+                <p><strong>Status:</strong> ${data.status === 'ativo' ? 'Ativo' : 'Inativo'}</p>
+                <p><strong>Data de Cadastro:</strong> ${new Date(data.data_cadastro).toLocaleString()}</p>
+              </div>
+            </div>
+          `;
+
+          if (data.turmas && data.turmas.length > 0) {
+            html += `
+              <div class="row mt-3">
+                <div class="col-12">
+                  <h4>Turmas</h4>
+                  <ul class="list-group">
+            `;
+            
+            data.turmas.forEach(turma => {
+              html += `
+                <li class="list-group-item bg-dark text-white border-secondary">
+                  <strong>${turma.nome_turma}</strong> (${turma.tipo_turma === 'pre_vestibular' ? 'Pré-Vestibular' : 'Vestibulinho'}) - ${turma.periodo}<br>
+                  Número de chamada: ${turma.numero_chamada}<br>
+                  Data de matrícula: ${new Date(turma.data_matricula).toLocaleDateString()}<br>
+                  Presenças: ${turma.total_presencas} | Faltas: ${turma.total_faltas} (${turma.percentual_presenca}% de presença)
+                </li>
+              `;
+            });
+
+            html += `
+                  </ul>
+                </div>
+              </div>
+            `;
+          } else {
+            html += `
+              <div class="alert alert-info mt-3">
+                Este aluno não está matriculado em nenhuma turma.
+              </div>
+            `;
+          }
+
+          modalBody.innerHTML = html;
+          alunoModal.show();
+        })
+        .catch(error => {
+          document.getElementById('alunoModalBody').innerHTML = `
+            <div class="alert alert-danger">
+              Erro ao carregar detalhes do aluno: ${error.message}
+            </div>
+          `;
+          alunoModal.show();
+        });
+    }
+
+    // Função para renderizar a tabela
+    function renderizarTabela(alunos, pagina = 1) {
+      const tbody = document.getElementById('tabela-alunos');
+      tbody.innerHTML = '';
+
+      if (alunos.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7">Nenhum aluno encontrado.</td></tr>';
+        return;
+      }
+
+      // Calcular índices para paginação
+      const inicio = (pagina - 1) * itensPorPagina;
+      const fim = inicio + itensPorPagina;
+      const alunosPagina = alunos.slice(inicio, fim);
+
+      alunosPagina.forEach(aluno => {
+        const row = document.createElement('tr');
+        
+        // Verificar se é menor de 18 anos
+        const idade = calcularIdade(aluno.nascimento);
+        const contato = idade < 18 && aluno.cont_emergencia_contato 
+          ? aluno.cont_emergencia_contato 
+          : aluno.telefone || 'Não informado';
+
+        // Determinar nome completo (nome social tem prioridade)
+        const nomeCompleto = (aluno.nome_social || aluno.nome) + ' ' + aluno.sobrenome;
+
+        // Traduzir tipo de matrícula
+        const tipoCurso = aluno.tipo_matricula === 'pre_vestibular' ? 'Pré-Vestibular' : 'Vestibulinho';
+
+        row.innerHTML = `
+          <td>${aluno.matricula}</td>
+          <td>${tipoCurso}</td>
+          <td>
+            <a href="#" class="text-primary" onclick="event.preventDefault(); carregarDetalhesAluno(${aluno.id_alunos})">
+              ${nomeCompleto}
+            </a>
+          </td>
+          <td>${formatarTelefone(contato)}</td>
+          <td>
+            <span class="badge ${aluno.status === 'ativo' ? 'bg-success' : 'bg-secondary'}">
+              ${aluno.status === 'ativo' ? 'Ativo' : 'Inativo'}
+            </span>
+          </td>
+          <td><a href="editar_aluno.html?id=${aluno.id_alunos}" class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i></a></td>
+          <td>
+            ${aluno.status === 'ativo' 
+              ? `<button onclick="inativarAluno(${aluno.id_alunos})" class="btn btn-warning btn-sm" title="Inativar">
+                   <i class="bi bi-person-x"></i>
+                 </button>`
+              : `<button onclick="ativarAluno(${aluno.id_alunos})" class="btn btn-success btn-sm" title="Ativar">
+                   <i class="bi bi-person-check"></i>
+                 </button>`}
+          </td>
+        `;
+
+        tbody.appendChild(row);
+      });
+
+      // Atualizar informações de paginação
+      document.getElementById('info-paginacao').textContent = 
+        `Mostrando ${inicio + 1} a ${Math.min(fim, alunos.length)} de ${alunos.length} registros`;
+
+      // Renderizar paginação
+      const totalPaginas = Math.ceil(alunos.length / itensPorPagina);
+      const paginacao = document.getElementById('paginacao');
+      paginacao.innerHTML = '';
+
+      if (totalPaginas > 1) {
+        // Botão Anterior
+        const liAnterior = document.createElement('li');
+        liAnterior.className = `page-item ${pagina === 1 ? 'disabled' : ''}`;
+        liAnterior.innerHTML = `<a class="page-link" href="#" ${pagina === 1 ? 'tabindex="-1" aria-disabled="true"' : ''}>Anterior</a>`;
+        liAnterior.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (pagina > 1) {
+            paginaAtual = pagina - 1;
+            renderizarTabela(alunosFiltrados, paginaAtual);
+          }
+        });
+        paginacao.appendChild(liAnterior);
+
+        // Números das páginas
+        const inicioPaginas = Math.max(1, pagina - 2);
+        const fimPaginas = Math.min(totalPaginas, pagina + 2);
+
+        for (let i = inicioPaginas; i <= fimPaginas; i++) {
+          const li = document.createElement('li');
+          li.className = `page-item ${i === pagina ? 'active' : ''}`;
+          li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+          li.addEventListener('click', (e) => {
+            e.preventDefault();
+            paginaAtual = i;
+            renderizarTabela(alunosFiltrados, paginaAtual);
+          });
+          paginacao.appendChild(li);
+        }
+
+        // Botão Próximo
+        const liProximo = document.createElement('li');
+        liProximo.className = `page-item ${pagina === totalPaginas ? 'disabled' : ''}`;
+        liProximo.innerHTML = `<a class="page-link" href="#" ${pagina === totalPaginas ? 'tabindex="-1" aria-disabled="true"' : ''}>Próximo</a>`;
+        liProximo.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (pagina < totalPaginas) {
+            paginaAtual = pagina + 1;
+            renderizarTabela(alunosFiltrados, paginaAtual);
+          }
+        });
+        paginacao.appendChild(liProximo);
+      }
+    }
+
+    // Função para filtrar alunos
+    function filtrarAlunos() {
+      const termo = document.getElementById('filtro-pesquisa').value.toLowerCase();
+      const mostrarInativos = document.getElementById('switch-inativos').checked;
+
+      alunosFiltrados = todosAlunos.filter(aluno => {
+        const correspondeTermo = 
+          aluno.matricula.toLowerCase().includes(termo) ||
+          (aluno.nome_social || aluno.nome).toLowerCase().includes(termo) ||
+          aluno.sobrenome.toLowerCase().includes(termo) ||
+          aluno.telefone.toLowerCase().includes(termo) ||
+          (aluno.cont_emergencia_contato && aluno.cont_emergencia_contato.toLowerCase().includes(termo)) ||
+          aluno.tipo_matricula.toLowerCase().includes(termo);
+        
+        const correspondeStatus = mostrarInativos || aluno.status === 'ativo';
+        
+        return correspondeTermo && correspondeStatus;
+      });
+
+      paginaAtual = 1;
+      renderizarTabela(alunosFiltrados, paginaAtual);
+    }
+
+    // Função para inativar aluno
+    function inativarAluno(id) {
+      if (confirm("Tem certeza que deseja inativar este aluno? Ele não aparecerá mais na lista de ativos.")) {
+        fetch(`../backend/inativar_aluno.php?id=${id}`, { 
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(response => {
+            if (!response.ok) throw new Error('Erro ao inativar aluno');
+            return response.json();
+          })
+          .then(() => {
+            // Atualizar o status localmente para evitar nova requisição
+            const aluno = todosAlunos.find(a => a.id_alunos === id);
+            if (aluno) aluno.status = 'inativo';
+            
+            filtrarAlunos();
           })
           .catch(error => {
             console.error(error);
-            alert("Erro ao excluir aluno.");
+            alert("Erro ao inativar aluno: " + error.message);
           });
       }
     }
+
+    // Função para ativar aluno
+    function ativarAluno(id) {
+      if (confirm("Tem certeza que deseja ativar este aluno novamente?")) {
+        fetch(`../backend/ativar_aluno.php?id=${id}`, { 
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(response => {
+            if (!response.ok) throw new Error('Erro ao ativar aluno');
+            return response.json();
+          })
+          .then(() => {
+            // Atualizar o status localmente para evitar nova requisição
+            const aluno = todosAlunos.find(a => a.id_alunos === id);
+            if (aluno) aluno.status = 'ativo';
+            
+            filtrarAlunos();
+          })
+          .catch(error => {
+            console.error(error);
+            alert("Erro ao ativar aluno: " + error.message);
+          });
+      }
+    }
+
+    // Carregar dados dos alunos
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('../backend/listar_alunos.php?todos=1')
+        .then(response => {
+          if (!response.ok) throw new Error('Erro ao buscar dados');
+          return response.json();
+        })
+        .then(data => {
+          todosAlunos = data;
+          alunosFiltrados = data.filter(aluno => aluno.status === 'ativo');
+          renderizarTabela(alunosFiltrados);
+          
+          // Configurar eventos
+          document.getElementById('filtro-pesquisa').addEventListener('input', filtrarAlunos);
+          document.getElementById('switch-inativos').addEventListener('change', filtrarAlunos);
+          document.getElementById('btn-limpar-pesquisa').addEventListener('click', () => {
+            document.getElementById('filtro-pesquisa').value = '';
+            filtrarAlunos();
+          });
+        })
+        .catch(error => {
+          const tbody = document.getElementById('tabela-alunos');
+          tbody.innerHTML = '<tr><td colspan="7">Erro ao carregar dados.</td></tr>';
+          console.error(error);
+        });
+    });
   </script>
 </body>
-
 </html>
