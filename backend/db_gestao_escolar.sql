@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_gestao_escolar`
 --
+CREATE Database db_gestao_escolar;
+USE db_gestao_escolar;
 
 -- --------------------------------------------------------
 
