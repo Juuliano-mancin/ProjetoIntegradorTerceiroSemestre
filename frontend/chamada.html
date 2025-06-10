@@ -97,36 +97,54 @@
         </thead>
         <tbody></tbody>
       </table>
-      <div class="d-flex justify-content-between mt-3">
-        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalRevisar">
-          <i class="bi bi-clock-history"></i> Revisar Chamada
-        </button>
+      <div class="d-flex justify-content-end mt-3">
         <button type="submit" class="btn btn-success d-none" id="salvarChamada">
           <i class="bi bi-save"></i> Salvar Chamada
         </button>
       </div>
     </form>
-  </main>
 
-  <div class="modal fade" id="modalRevisar" tabindex="-1" aria-labelledby="modalRevisarLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-dark text-white">
-          <h5 class="modal-title" id="modalRevisarLabel">Revisar Chamada</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+    <!-- Seção de Histórico de Chamadas -->
+    <div class="mt-5">
+      <h3 class="mb-3">Histórico de Chamadas</h3>
+      
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="filtroData" class="form-label">Filtrar por Data</label>
+          <input type="date" class="form-control" id="filtroData">
         </div>
-        <div class="modal-body">
-          <form id="formRevisar">
-            <div class="mb-3">
-              <label for="dataRevisar" class="form-label">Selecione a data</label>
-              <input type="date" class="form-control" id="dataRevisar" name="dataRevisar" required>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Carregar Chamada</button>
-          </form>
+        <div class="col-md-2 d-flex align-items-end">
+          <button type="button" class="btn btn-primary w-100" id="btnFiltrar">
+            <i class="bi bi-funnel"></i> Filtrar
+          </button>
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+          <button type="button" class="btn btn-secondary w-100" id="btnLimparFiltro">
+            <i class="bi bi-x-circle"></i> Limpar
+          </button>
         </div>
       </div>
+      
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover" id="tabelaHistorico">
+          <thead class="table-dark">
+            <tr>
+              <th>Turma</th>
+              <th>Data</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      
+      <nav aria-label="Navegação de páginas">
+        <ul class="pagination justify-content-center" id="paginacao">
+          <!-- Paginação será gerada dinamicamente via JavaScript -->
+        </ul>
+      </nav>
     </div>
-  </div>
+  </main>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -136,8 +154,18 @@
       const formTurma = document.getElementById("formTurma");
       const formChamada = document.getElementById("formChamada");
       const salvarBtn = document.getElementById("salvarChamada");
-      const formRevisar = document.getElementById("formRevisar");
-      const dataInput = document.getElementById("data"); // Adicionado
+      const dataInput = document.getElementById("data");
+      const tabelaHistorico = document.getElementById("tabelaHistorico");
+      const corpoHistorico = tabelaHistorico.querySelector("tbody");
+      const filtroData = document.getElementById("filtroData");
+      const btnFiltrar = document.getElementById("btnFiltrar");
+      const btnLimparFiltro = document.getElementById("btnLimparFiltro");
+      const paginacao = document.getElementById("paginacao");
+
+      // Variáveis para paginação
+      let historicoChamadas = [];
+      let paginaAtual = 1;
+      const itensPorPagina = 10;
 
       // Set max date for dataInput to today
       const today = new Date();
@@ -145,7 +173,7 @@
       const month = String(today.getMonth() + 1).padStart(2, '0');
       const day = String(today.getDate()).padStart(2, '0');
       dataInput.setAttribute("max", `${year}-${month}-${day}`);
-      dataInput.value = `${year}-${month}-${day}`; // Opcional: preencher com a data de hoje
+      dataInput.value = `${year}-${month}-${day}`;
 
       // Preencher turmas
       fetch('../backend/get_turmas.php')
@@ -157,13 +185,16 @@
             opt.textContent = t.nome_turma;
             turmaSelect.appendChild(opt);
           });
+          
+          // Carregar histórico após carregar turmas
+          carregarHistoricoChamadas();
         });
 
       // Carregar alunos para chamada
       formTurma.addEventListener("submit", e => {
         e.preventDefault();
         const turmaId = turmaSelect.value;
-        const data = dataInput.value; // Usar dataInput
+        const data = dataInput.value;
 
         fetch(`../backend/get_alunos_turma.php?id_turma=${turmaId}&data=${data}`)
           .then(res => res.json())
@@ -188,25 +219,154 @@
         e.preventDefault();
         const formData = new FormData(formChamada);
         formData.append("id_turma", turmaSelect.value);
-        formData.append("data", dataInput.value); // Usar dataInput
+        formData.append("data", dataInput.value);
 
         fetch('../backend/post_chamada.php', {
           method: "POST",
           body: formData
         })
         .then(res => res.text())
-        .then(alert);
+        .then(msg => {
+          alert(msg);
+          // Recarregar histórico após salvar
+          carregarHistoricoChamadas();
+        });
       });
 
-      // Revisar chamada
-      formRevisar.addEventListener("submit", e => {
-        e.preventDefault();
-        const data = document.getElementById("dataRevisar").value;
-        dataInput.value = data; // Usar dataInput
-        document.getElementById("modalRevisar").classList.remove("show");
-        document.body.classList.remove("modal-open");
-        document.querySelector(".modal-backdrop").remove();
-        formTurma.requestSubmit();
+      // Carregar histórico de chamadas
+      function carregarHistoricoChamadas(filtro = null) {
+        let url = '../backend/get_historico_chamadas.php';
+        if (filtro) {
+          url += `?data=${filtro}`;
+        }
+
+        fetch(url)
+          .then(res => res.json())
+          .then(data => {
+            historicoChamadas = data;
+            atualizarTabelaHistorico();
+            atualizarPaginacao();
+          });
+      }
+
+      // Atualizar tabela de histórico com os dados da página atual
+      function atualizarTabelaHistorico() {
+        corpoHistorico.innerHTML = "";
+        
+        const inicio = (paginaAtual - 1) * itensPorPagina;
+        const fim = inicio + itensPorPagina;
+        const chamadasPagina = historicoChamadas.slice(inicio, fim);
+        
+        if (chamadasPagina.length === 0) {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td colspan="3" class="text-center">Nenhum registro encontrado</td>`;
+          corpoHistorico.appendChild(tr);
+          return;
+        }
+
+        chamadasPagina.forEach(chamada => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${chamada.nome_turma}</td>
+            <td>${formatarData(chamada.data_chamada)}</td>
+            <td>
+              <button class="btn btn-sm btn-outline-primary btn-revisar" 
+                      data-turma="${chamada.id_turma}" 
+                      data-data="${chamada.data_chamada}">
+                <i class="bi bi-clock-history"></i> Revisar
+              </button>
+            </td>
+          `;
+          corpoHistorico.appendChild(tr);
+        });
+
+        // Adicionar eventos aos botões de revisar
+        document.querySelectorAll('.btn-revisar').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const turmaId = this.getAttribute('data-turma');
+            const data = this.getAttribute('data-data');
+            
+            // Selecionar a turma no dropdown
+            turmaSelect.value = turmaId;
+            
+            // Definir a data
+            dataInput.value = data;
+            
+            // Disparar o submit do formulário
+            formTurma.requestSubmit();
+          });
+        });
+      }
+
+      // Atualizar controles de paginação
+      function atualizarPaginacao() {
+        paginacao.innerHTML = "";
+        const totalPaginas = Math.ceil(historicoChamadas.length / itensPorPagina);
+        
+        if (totalPaginas <= 1) return;
+        
+        // Botão Anterior
+        const liAnterior = document.createElement("li");
+        liAnterior.className = `page-item ${paginaAtual === 1 ? 'disabled' : ''}`;
+        liAnterior.innerHTML = `<a class="page-link" href="#">Anterior</a>`;
+        liAnterior.addEventListener('click', e => {
+          e.preventDefault();
+          if (paginaAtual > 1) {
+            paginaAtual--;
+            atualizarTabelaHistorico();
+            atualizarPaginacao();
+          }
+        });
+        paginacao.appendChild(liAnterior);
+        
+        // Números das páginas
+        for (let i = 1; i <= totalPaginas; i++) {
+          const li = document.createElement("li");
+          li.className = `page-item ${paginaAtual === i ? 'active' : ''}`;
+          li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+          li.addEventListener('click', e => {
+            e.preventDefault();
+            paginaAtual = i;
+            atualizarTabelaHistorico();
+            atualizarPaginacao();
+          });
+          paginacao.appendChild(li);
+        }
+        
+        // Botão Próximo
+        const liProximo = document.createElement("li");
+        liProximo.className = `page-item ${paginaAtual === totalPaginas ? 'disabled' : ''}`;
+        liProximo.innerHTML = `<a class="page-link" href="#">Próximo</a>`;
+        liProximo.addEventListener('click', e => {
+          e.preventDefault();
+          if (paginaAtual < totalPaginas) {
+            paginaAtual++;
+            atualizarTabelaHistorico();
+            atualizarPaginacao();
+          }
+        });
+        paginacao.appendChild(liProximo);
+      }
+
+      // Formatador de data para exibição
+      function formatarData(dataString) {
+        const data = new Date(dataString);
+        return data.toLocaleDateString('pt-BR');
+      }
+
+      // Filtro de data
+      btnFiltrar.addEventListener('click', () => {
+        if (filtroData.value) {
+          carregarHistoricoChamadas(filtroData.value);
+          paginaAtual = 1;
+        }
+      });
+
+      // Limpar filtro
+      btnLimparFiltro.addEventListener('click', () => {
+        filtroData.value = '';
+        carregarHistoricoChamadas();
+        paginaAtual = 1;
       });
     });
   </script>
