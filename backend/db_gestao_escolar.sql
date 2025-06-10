@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 06, 2025 at 07:50 AM
+-- Generation Time: Jun 10, 2025 at 05:26 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_gestao_escolar`
 --
-CREATE DATABASE IF NOT EXISTS `db_gestao_escolar` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `db_gestao_escolar`;
 
 -- --------------------------------------------------------
 
@@ -56,6 +54,32 @@ CREATE TABLE `tb_alunos` (
   `status` enum('ativo','inativo') NOT NULL DEFAULT 'ativo',
   `data_cadastro` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tb_alunos`
+--
+
+INSERT INTO `tb_alunos` (`id_alunos`, `nome`, `nome_social`, `sobrenome`, `genero`, `nascimento`, `cpf`, `rg`, `matricula`, `tipo_matricula`, `semestre`, `telefone`, `email`, `cep`, `logradouro`, `numero`, `complemento`, `bairro`, `cidade`, `uf`, `cont_emergencia_nome`, `cont_emergencia_relacao`, `cont_emergencia_contato`, `status`, `data_cadastro`) VALUES
+(1, 'Calebe', NULL, 'Fogaça', 'masculino', '2000-12-02', '59137217404', '286209980', '2025010001', 'vestibulinho', 1, '+55 51 0688 5502', 'helena53@almeida.br', '05710122', 'Lago Pinto', '874', '', 'Parque Real', 'Mogi Mirim', 'SP', 'Vitor Lima', 'outros', '(081) 8739 8950', 'ativo', '2025-06-10 00:21:11'),
+(2, 'Agatha', NULL, 'Silva', 'nao_informado', '2006-10-30', '75955797489', '685426593', '2025010002', 'vestibulinho', 1, '0300-786-5802', 'kferreira@mendes.br', '76950391', 'Núcleo de Alves', '73', 'quibusdam', 'Parque Real', 'Mogi Mirim', 'SP', 'Rebeca Caldeira', 'outros', '(011) 7387 2287', 'ativo', '2025-06-10 00:21:11'),
+(3, 'Vitor Gabriel', NULL, 'Rezende', 'transgenero', '2000-03-10', '17223471978', '489991690', '2025010003', 'pre_vestibular', 1, '+55 (071) 0454-6601', 'marina11@alves.br', '86054708', 'Pátio Samuel Araújo', '26', 'veritatis', 'Centro', 'Mogi Mirim', 'SP', 'João Lucas Duarte', 'parentesco_proximo', '+55 21 0868 4246', 'ativo', '2025-06-10 00:21:11'),
+(4, 'Vicente', NULL, 'Costela', 'nao_informado', '2008-07-15', '47136963559', '555235645', '2025010004', 'vestibulinho', 1, '+55 71 2966 0270', 'tporto@uol.com.br', '28588825', 'Colônia de Viana', '63', 'consectetur', 'Centro', 'Mogi Mirim', 'SP', 'Luiz Fernando Farias', 'pai_mae', '+55 (084) 5460-8138', 'ativo', '2025-06-10 00:21:11'),
+(5, 'João', NULL, 'Aragão', 'feminino', '2002-09-28', '78461535442', '247957085', '2025010005', 'pre_vestibular', 1, '+55 21 9515 8828', 'usales@araujo.org', '56382-90', 'Residencial de Mendes', '610', '', 'Jardim Bela Vista', 'Mogi Guaçu', 'SP', 'Isabelly Peixoto', 'outros', '(051) 5375 3260', 'ativo', '2025-06-10 00:21:11'),
+(6, 'Amanda', 'Amanda', 'Nascimento', 'nao_informado', '2007-12-14', '25445222671', '919478932', '2025010006', 'pre_vestibular', 1, '84 6514-1489', 'nascimentocalebe@bol.com.br', '41795-37', 'Travessa Isabella Monteiro', '97', 'repellat', 'Santa Cruz', 'Mogi Guaçu', 'SP', 'Joaquim Barros', 'nenhum', '+55 (061) 1067-2780', 'ativo', '2025-06-10 00:21:11'),
+(7, 'Brenda', NULL, 'Viana', 'nao_informado', '2001-11-05', '34109540990', '641765260', '2025010007', 'vestibulinho', 1, '+55 (051) 7894 9056', 'fernandesmiguel@peixoto.com', '72304828', 'Lagoa Sales', '53', 'quia', 'Santa Cruz', 'Mogi Mirim', 'SP', 'Calebe Pires', 'outros', '0800-884-3816', 'ativo', '2025-06-10 00:21:11'),
+(8, 'Alice', NULL, 'Porto', 'masculino', '2001-04-29', '77567761789', '464564284', '2025010008', 'pre_vestibular', 1, '(021) 8527-2333', 'kaiquecardoso@araujo.com', '58003-64', 'Condomínio Miguel Martins', '18', '', 'Santa Cruz', 'Mogi Guaçu', 'SP', 'Sra. Valentina da Costa', 'nenhum', '(061) 3638-6683', 'ativo', '2025-06-10 00:21:11'),
+(9, 'Yago', NULL, 'Cardoso', 'nao_informado', '2007-11-22', '8024890646', '307933913', '2025010009', 'pre_vestibular', 1, '+55 84 7121 7589', 'wsilveira@moreira.net', '01819-51', 'Estação Ana Beatriz Costela', '12', 'dolorem', 'Santa Cruz', 'Mogi Mirim', 'SP', 'Isaac Azevedo', 'nenhum', '+55 41 2376 3600', 'ativo', '2025-06-10 00:21:11'),
+(10, 'Heitor', NULL, 'Correia', 'outro', '2007-04-15', '11577929559', '144235461', '2025010010', 'pre_vestibular', 1, '+55 (061) 5733 3652', 'goncalvespietro@monteiro.net', '08113432', 'Aeroporto de Viana', '96', '', 'Centro', 'Mogi Mirim', 'SP', 'Dr. Pedro Lucas Costela', 'outros', '84 0945 5058', 'ativo', '2025-06-10 00:21:11'),
+(11, 'Sabrina', NULL, 'Almeida', 'feminino', '2004-06-10', '51882710695', '772685368', '2025010011', 'pre_vestibular', 1, '+55 (061) 9571-9836', 'juanmoraes@rocha.org', '60402352', 'Conjunto Castro', '21', 'magni', 'Santa Cruz', 'Mogi Mirim', 'SP', 'Fernando Moreira', 'outros', '+55 81 4619 4881', 'ativo', '2025-06-10 00:21:11'),
+(12, 'Maria Cecília', NULL, 'Teixeira', 'masculino', '2001-06-30', '40071140121', '858185378', '2025010012', 'vestibulinho', 1, '(041) 7301 1917', 'maria-eduarda22@uol.com.br', '63306212', 'Ladeira de Peixoto', '56', '', 'Jardim Bela Vista', 'Mogi Guaçu', 'SP', 'Antônio Costa', 'parentesco_proximo', '0300 649 0834', 'ativo', '2025-06-10 00:21:11'),
+(13, 'Pedro Henrique', NULL, 'Vieira', 'outro', '2005-03-11', '4265184600', '714663636', '2025010013', 'pre_vestibular', 1, '+55 (011) 4436-3706', 'joaquimbarros@campos.net', '96851-31', 'Setor Lima', '4', '', 'Santa Cruz', 'Mogi Guaçu', 'SP', 'Alícia da Costa', 'nenhum', '51 1067 9652', 'ativo', '2025-06-10 00:21:11'),
+(14, 'Luna', NULL, 'Nunes', 'outro', '2006-09-24', '93020729214', '111596854', '2025010014', 'vestibulinho', 1, '+55 31 0322 9458', 'miguel62@bol.com.br', '09928991', 'Via Luiz Felipe Vieira', '60', '', 'Santa Cruz', 'Mogi Mirim', 'SP', 'Vitor Gabriel Rezende', 'nenhum', '31 4899 5320', 'ativo', '2025-06-10 00:21:11'),
+(15, 'Vinicius', NULL, 'Barros', 'nao_informado', '2009-05-28', '64840386018', '861384203', '2025010015', 'vestibulinho', 1, '31 6219 1396', 'rodriguesemanuella@souza.br', '45723-10', 'Distrito de Moura', '3', 'dignissimos', 'Santa Cruz', 'Mogi Guaçu', 'SP', 'Bárbara Nunes', 'nenhum', '+55 (051) 8382-7807', 'ativo', '2025-06-10 00:21:11'),
+(16, 'Henrique', 'Henrique', 'Freitas', 'transgenero', '2005-05-24', '94434092021', '542163099', '2025010016', 'pre_vestibular', 1, '(031) 3167-6506', 'martinsana-luiza@uol.com.br', '10555388', 'Trecho Maria Vitória Mendes', '30', '', 'Vila São João', 'Mogi Guaçu', 'SP', 'Pietro Porto', 'parentesco_proximo', '+55 (081) 7605-2458', 'ativo', '2025-06-10 00:21:11'),
+(17, 'Pedro Henrique', NULL, 'Cardoso', 'outro', '2005-04-28', '13086370800', '599583828', '2025010017', 'pre_vestibular', 1, '+55 81 8097 8667', 'joao-guilhermemonteiro@melo.br', '61586134', 'Vila Costa', '42', 'blanditiis', 'Jardim Bela Vista', 'Mogi Guaçu', 'SP', 'Kevin Porto', 'outros', '(021) 7060-1486', 'ativo', '2025-06-10 00:21:11'),
+(18, 'Vitor Gabriel', NULL, 'Melo', 'nao_informado', '2005-09-11', '10089628891', '357678956', '2025010018', 'vestibulinho', 1, '0500-210-7685', 'murilolopes@da.br', '53809-72', 'Feira Mariana Ribeiro', '334', '', 'Santa Cruz', 'Mogi Mirim', 'SP', 'Lucas Gabriel Rocha', 'outros', '(071) 7774 6416', 'ativo', '2025-06-10 00:21:11'),
+(19, 'Bianca', NULL, 'Castro', 'transgenero', '2004-12-01', '78953391915', '605376657', '2025010019', 'pre_vestibular', 1, '0800-823-0268', 'lara34@hotmail.com', '61968157', 'Vereda de Cunha', '35', 'deserunt', 'Parque Real', 'Mogi Mirim', 'SP', 'Kaique da Costa', 'pai_mae', '+55 (031) 7493-9343', 'ativo', '2025-06-10 00:21:11'),
+(20, 'Joana', NULL, 'Barros', 'nao_binario', '2004-09-11', '29067869927', '656177265', '2025010020', 'vestibulinho', 1, '(041) 0225-9250', 'brunomonteiro@cardoso.br', '18809316', 'Feira Lima', '37', 'repellendus', 'Vila São João', 'Mogi Mirim', 'SP', 'Dr. Anthony Rodrigues', 'nenhum', '(041) 6692 9233', 'ativo', '2025-06-10 00:21:11');
 
 --
 -- Triggers `tb_alunos`
@@ -95,6 +119,13 @@ CREATE TABLE `tb_alunos_turma` (
   `total_faltas` int(11) DEFAULT 0,
   `percentual_presenca` decimal(5,2) DEFAULT 100.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tb_alunos_turma`
+--
+
+INSERT INTO `tb_alunos_turma` (`id_aluno_turma`, `id_aluno`, `id_turma`, `numero_chamada`, `data_matricula`, `total_presencas`, `total_faltas`, `percentual_presenca`) VALUES
+(1, 2, 1, 1, '2025-06-10', 2, 1, 66.67);
 
 --
 -- Triggers `tb_alunos_turma`
@@ -167,6 +198,79 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_chamada`
+--
+
+CREATE TABLE `tb_chamada` (
+  `id_chamada` int(11) NOT NULL,
+  `id_aluno` int(11) NOT NULL,
+  `id_turma` int(11) NOT NULL,
+  `data_chamada` date NOT NULL,
+  `situacao` enum('presente','ausente') NOT NULL DEFAULT 'ausente'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tb_chamada`
+--
+
+INSERT INTO `tb_chamada` (`id_chamada`, `id_aluno`, `id_turma`, `data_chamada`, `situacao`) VALUES
+(1, 2, 1, '2025-06-09', 'presente'),
+(2, 2, 1, '2025-06-10', 'presente'),
+(3, 2, 1, '2025-06-08', 'ausente');
+
+--
+-- Triggers `tb_chamada`
+--
+DELIMITER $$
+CREATE TRIGGER `trg_chamada_delete` AFTER DELETE ON `tb_chamada` FOR EACH ROW BEGIN
+  IF OLD.situacao = 'presente' THEN
+    UPDATE tb_alunos_turma
+    SET total_presencas = total_presencas - 1
+    WHERE id_aluno = OLD.id_aluno AND id_turma = OLD.id_turma;
+  ELSE
+    UPDATE tb_alunos_turma
+    SET total_faltas = total_faltas - 1
+    WHERE id_aluno = OLD.id_aluno AND id_turma = OLD.id_turma;
+  END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trg_chamada_insert` AFTER INSERT ON `tb_chamada` FOR EACH ROW BEGIN
+  IF NEW.situacao = 'presente' THEN
+    UPDATE tb_alunos_turma
+    SET total_presencas = total_presencas + 1
+    WHERE id_aluno = NEW.id_aluno AND id_turma = NEW.id_turma;
+  ELSE
+    UPDATE tb_alunos_turma
+    SET total_faltas = total_faltas + 1
+    WHERE id_aluno = NEW.id_aluno AND id_turma = NEW.id_turma;
+  END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trg_chamada_update` AFTER UPDATE ON `tb_chamada` FOR EACH ROW BEGIN
+  IF OLD.situacao != NEW.situacao THEN
+    IF NEW.situacao = 'presente' THEN
+      UPDATE tb_alunos_turma
+      SET total_presencas = total_presencas + 1,
+          total_faltas = total_faltas - 1
+      WHERE id_aluno = NEW.id_aluno AND id_turma = NEW.id_turma;
+    ELSE
+      UPDATE tb_alunos_turma
+      SET total_presencas = total_presencas - 1,
+          total_faltas = total_faltas + 1
+      WHERE id_aluno = NEW.id_aluno AND id_turma = NEW.id_turma;
+    END IF;
+  END IF;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_turmas`
 --
 
@@ -179,6 +283,13 @@ CREATE TABLE `tb_turmas` (
   `numero_alunos` int(11) DEFAULT 0,
   `status` enum('ativo','inativo') NOT NULL DEFAULT 'ativo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tb_turmas`
+--
+
+INSERT INTO `tb_turmas` (`id_turmas`, `nome_turma`, `tipo_turma`, `periodo`, `data_criacao`, `numero_alunos`, `status`) VALUES
+(1, 'Turma A - Pré-Vestibular 2025', 'pre_vestibular', 'noite', '2025-06-10', 1, 'ativo');
 
 --
 -- Indexes for dumped tables
@@ -207,6 +318,14 @@ ALTER TABLE `tb_alunos_turma`
   ADD KEY `idx_matricula_turma` (`id_turma`);
 
 --
+-- Indexes for table `tb_chamada`
+--
+ALTER TABLE `tb_chamada`
+  ADD PRIMARY KEY (`id_chamada`),
+  ADD UNIQUE KEY `id_aluno` (`id_aluno`,`id_turma`,`data_chamada`),
+  ADD KEY `fk_chamada_turma` (`id_turma`);
+
+--
 -- Indexes for table `tb_turmas`
 --
 ALTER TABLE `tb_turmas`
@@ -223,19 +342,25 @@ ALTER TABLE `tb_turmas`
 -- AUTO_INCREMENT for table `tb_alunos`
 --
 ALTER TABLE `tb_alunos`
-  MODIFY `id_alunos` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_alunos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tb_alunos_turma`
 --
 ALTER TABLE `tb_alunos_turma`
-  MODIFY `id_aluno_turma` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_aluno_turma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tb_chamada`
+--
+ALTER TABLE `tb_chamada`
+  MODIFY `id_chamada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tb_turmas`
 --
 ALTER TABLE `tb_turmas`
-  MODIFY `id_turmas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_turmas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -247,448 +372,13 @@ ALTER TABLE `tb_turmas`
 ALTER TABLE `tb_alunos_turma`
   ADD CONSTRAINT `fk_aluno` FOREIGN KEY (`id_aluno`) REFERENCES `tb_alunos` (`id_alunos`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_turma` FOREIGN KEY (`id_turma`) REFERENCES `tb_turmas` (`id_turmas`) ON DELETE CASCADE ON UPDATE CASCADE;
---
--- Database: `phpmyadmin`
---
-CREATE DATABASE IF NOT EXISTS `phpmyadmin` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
-USE `phpmyadmin`;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__bookmark`
---
-
-CREATE TABLE `pma__bookmark` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `dbase` varchar(255) NOT NULL DEFAULT '',
-  `user` varchar(255) NOT NULL DEFAULT '',
-  `label` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `query` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Bookmarks';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__central_columns`
---
-
-CREATE TABLE `pma__central_columns` (
-  `db_name` varchar(64) NOT NULL,
-  `col_name` varchar(64) NOT NULL,
-  `col_type` varchar(64) NOT NULL,
-  `col_length` text DEFAULT NULL,
-  `col_collation` varchar(64) NOT NULL,
-  `col_isNull` tinyint(1) NOT NULL,
-  `col_extra` varchar(255) DEFAULT '',
-  `col_default` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Central list of columns';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__column_info`
---
-
-CREATE TABLE `pma__column_info` (
-  `id` int(5) UNSIGNED NOT NULL,
-  `db_name` varchar(64) NOT NULL DEFAULT '',
-  `table_name` varchar(64) NOT NULL DEFAULT '',
-  `column_name` varchar(64) NOT NULL DEFAULT '',
-  `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `mimetype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `transformation` varchar(255) NOT NULL DEFAULT '',
-  `transformation_options` varchar(255) NOT NULL DEFAULT '',
-  `input_transformation` varchar(255) NOT NULL DEFAULT '',
-  `input_transformation_options` varchar(255) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Column information for phpMyAdmin';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__designer_settings`
---
-
-CREATE TABLE `pma__designer_settings` (
-  `username` varchar(64) NOT NULL,
-  `settings_data` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Settings related to Designer';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__export_templates`
---
-
-CREATE TABLE `pma__export_templates` (
-  `id` int(5) UNSIGNED NOT NULL,
-  `username` varchar(64) NOT NULL,
-  `export_type` varchar(10) NOT NULL,
-  `template_name` varchar(64) NOT NULL,
-  `template_data` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved export templates';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__favorite`
---
-
-CREATE TABLE `pma__favorite` (
-  `username` varchar(64) NOT NULL,
-  `tables` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Favorite tables';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__history`
---
-
-CREATE TABLE `pma__history` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `username` varchar(64) NOT NULL DEFAULT '',
-  `db` varchar(64) NOT NULL DEFAULT '',
-  `table` varchar(64) NOT NULL DEFAULT '',
-  `timevalue` timestamp NOT NULL DEFAULT current_timestamp(),
-  `sqlquery` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='SQL history for phpMyAdmin';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__navigationhiding`
---
-
-CREATE TABLE `pma__navigationhiding` (
-  `username` varchar(64) NOT NULL,
-  `item_name` varchar(64) NOT NULL,
-  `item_type` varchar(64) NOT NULL,
-  `db_name` varchar(64) NOT NULL,
-  `table_name` varchar(64) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Hidden items of navigation tree';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__pdf_pages`
---
-
-CREATE TABLE `pma__pdf_pages` (
-  `db_name` varchar(64) NOT NULL DEFAULT '',
-  `page_nr` int(10) UNSIGNED NOT NULL,
-  `page_descr` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='PDF relation pages for phpMyAdmin';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__recent`
---
-
-CREATE TABLE `pma__recent` (
-  `username` varchar(64) NOT NULL,
-  `tables` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Recently accessed tables';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__relation`
---
-
-CREATE TABLE `pma__relation` (
-  `master_db` varchar(64) NOT NULL DEFAULT '',
-  `master_table` varchar(64) NOT NULL DEFAULT '',
-  `master_field` varchar(64) NOT NULL DEFAULT '',
-  `foreign_db` varchar(64) NOT NULL DEFAULT '',
-  `foreign_table` varchar(64) NOT NULL DEFAULT '',
-  `foreign_field` varchar(64) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Relation table';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__savedsearches`
---
-
-CREATE TABLE `pma__savedsearches` (
-  `id` int(5) UNSIGNED NOT NULL,
-  `username` varchar(64) NOT NULL DEFAULT '',
-  `db_name` varchar(64) NOT NULL DEFAULT '',
-  `search_name` varchar(64) NOT NULL DEFAULT '',
-  `search_data` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved searches';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__table_coords`
---
-
-CREATE TABLE `pma__table_coords` (
-  `db_name` varchar(64) NOT NULL DEFAULT '',
-  `table_name` varchar(64) NOT NULL DEFAULT '',
-  `pdf_page_number` int(11) NOT NULL DEFAULT 0,
-  `x` float UNSIGNED NOT NULL DEFAULT 0,
-  `y` float UNSIGNED NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table coordinates for phpMyAdmin PDF output';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__table_info`
---
-
-CREATE TABLE `pma__table_info` (
-  `db_name` varchar(64) NOT NULL DEFAULT '',
-  `table_name` varchar(64) NOT NULL DEFAULT '',
-  `display_field` varchar(64) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table information for phpMyAdmin';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__table_uiprefs`
---
-
-CREATE TABLE `pma__table_uiprefs` (
-  `username` varchar(64) NOT NULL,
-  `db_name` varchar(64) NOT NULL,
-  `table_name` varchar(64) NOT NULL,
-  `prefs` text NOT NULL,
-  `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Tables'' UI preferences';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__tracking`
---
-
-CREATE TABLE `pma__tracking` (
-  `db_name` varchar(64) NOT NULL,
-  `table_name` varchar(64) NOT NULL,
-  `version` int(10) UNSIGNED NOT NULL,
-  `date_created` datetime NOT NULL,
-  `date_updated` datetime NOT NULL,
-  `schema_snapshot` text NOT NULL,
-  `schema_sql` text DEFAULT NULL,
-  `data_sql` longtext DEFAULT NULL,
-  `tracking` set('UPDATE','REPLACE','INSERT','DELETE','TRUNCATE','CREATE DATABASE','ALTER DATABASE','DROP DATABASE','CREATE TABLE','ALTER TABLE','RENAME TABLE','DROP TABLE','CREATE INDEX','DROP INDEX','CREATE VIEW','ALTER VIEW','DROP VIEW') DEFAULT NULL,
-  `tracking_active` int(1) UNSIGNED NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Database changes tracking for phpMyAdmin';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__userconfig`
---
-
-CREATE TABLE `pma__userconfig` (
-  `username` varchar(64) NOT NULL,
-  `timevalue` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `config_data` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User preferences storage for phpMyAdmin';
-
---
--- Dumping data for table `pma__userconfig`
---
 
-INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
-('root', '2025-06-02 15:41:19', '{\"Console\\/Mode\":\"collapse\"}');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__usergroups`
---
-
-CREATE TABLE `pma__usergroups` (
-  `usergroup` varchar(64) NOT NULL,
-  `tab` varchar(64) NOT NULL,
-  `allowed` enum('Y','N') NOT NULL DEFAULT 'N'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User groups with configured menu items';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__users`
---
-
-CREATE TABLE `pma__users` (
-  `username` varchar(64) NOT NULL,
-  `usergroup` varchar(64) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Users and their assignments to user groups';
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `pma__bookmark`
---
-ALTER TABLE `pma__bookmark`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `pma__central_columns`
---
-ALTER TABLE `pma__central_columns`
-  ADD PRIMARY KEY (`db_name`,`col_name`);
-
---
--- Indexes for table `pma__column_info`
---
-ALTER TABLE `pma__column_info`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `db_name` (`db_name`,`table_name`,`column_name`);
-
---
--- Indexes for table `pma__designer_settings`
---
-ALTER TABLE `pma__designer_settings`
-  ADD PRIMARY KEY (`username`);
-
---
--- Indexes for table `pma__export_templates`
---
-ALTER TABLE `pma__export_templates`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `u_user_type_template` (`username`,`export_type`,`template_name`);
-
---
--- Indexes for table `pma__favorite`
---
-ALTER TABLE `pma__favorite`
-  ADD PRIMARY KEY (`username`);
-
---
--- Indexes for table `pma__history`
---
-ALTER TABLE `pma__history`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `username` (`username`,`db`,`table`,`timevalue`);
-
---
--- Indexes for table `pma__navigationhiding`
---
-ALTER TABLE `pma__navigationhiding`
-  ADD PRIMARY KEY (`username`,`item_name`,`item_type`,`db_name`,`table_name`);
-
---
--- Indexes for table `pma__pdf_pages`
---
-ALTER TABLE `pma__pdf_pages`
-  ADD PRIMARY KEY (`page_nr`),
-  ADD KEY `db_name` (`db_name`);
-
---
--- Indexes for table `pma__recent`
---
-ALTER TABLE `pma__recent`
-  ADD PRIMARY KEY (`username`);
-
---
--- Indexes for table `pma__relation`
---
-ALTER TABLE `pma__relation`
-  ADD PRIMARY KEY (`master_db`,`master_table`,`master_field`),
-  ADD KEY `foreign_field` (`foreign_db`,`foreign_table`);
-
---
--- Indexes for table `pma__savedsearches`
---
-ALTER TABLE `pma__savedsearches`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `u_savedsearches_username_dbname` (`username`,`db_name`,`search_name`);
-
---
--- Indexes for table `pma__table_coords`
---
-ALTER TABLE `pma__table_coords`
-  ADD PRIMARY KEY (`db_name`,`table_name`,`pdf_page_number`);
-
---
--- Indexes for table `pma__table_info`
---
-ALTER TABLE `pma__table_info`
-  ADD PRIMARY KEY (`db_name`,`table_name`);
-
---
--- Indexes for table `pma__table_uiprefs`
---
-ALTER TABLE `pma__table_uiprefs`
-  ADD PRIMARY KEY (`username`,`db_name`,`table_name`);
-
---
--- Indexes for table `pma__tracking`
---
-ALTER TABLE `pma__tracking`
-  ADD PRIMARY KEY (`db_name`,`table_name`,`version`);
-
---
--- Indexes for table `pma__userconfig`
---
-ALTER TABLE `pma__userconfig`
-  ADD PRIMARY KEY (`username`);
-
---
--- Indexes for table `pma__usergroups`
---
-ALTER TABLE `pma__usergroups`
-  ADD PRIMARY KEY (`usergroup`,`tab`,`allowed`);
-
---
--- Indexes for table `pma__users`
---
-ALTER TABLE `pma__users`
-  ADD PRIMARY KEY (`username`,`usergroup`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `pma__bookmark`
---
-ALTER TABLE `pma__bookmark`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `pma__column_info`
---
-ALTER TABLE `pma__column_info`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `pma__export_templates`
---
-ALTER TABLE `pma__export_templates`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `pma__history`
---
-ALTER TABLE `pma__history`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `pma__pdf_pages`
---
-ALTER TABLE `pma__pdf_pages`
-  MODIFY `page_nr` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `pma__savedsearches`
---
-ALTER TABLE `pma__savedsearches`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- Database: `test`
+-- Constraints for table `tb_chamada`
 --
-CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `test`;
+ALTER TABLE `tb_chamada`
+  ADD CONSTRAINT `fk_chamada_aluno` FOREIGN KEY (`id_aluno`) REFERENCES `tb_alunos` (`id_alunos`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_chamada_turma` FOREIGN KEY (`id_turma`) REFERENCES `tb_turmas` (`id_turmas`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
