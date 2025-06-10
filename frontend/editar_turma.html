@@ -202,30 +202,37 @@
 
   <!-- Modal Matricular Aluno -->
   <div class="modal fade" id="modalMatricularAluno" tabindex="-1" aria-labelledby="modalMatricularAlunoLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content border border-dark rounded">
         <div class="modal-header bg-dark text-white">
           <h5 class="modal-title" id="modalMatricularAlunoLabel">Matricular Aluno</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body bg-light text-dark">
-          <form id="form-matricular-aluno">
-            <input type="hidden" id="turma_id_matricula" name="turma_id">
-            <div class="mb-3">
-              <label for="aluno_select" class="form-label">Selecione o Aluno</label>
-              <select class="form-select border border-dark rounded" id="aluno_select" required>
-                <option value="" selected disabled>Selecione um aluno...</option>
-              </select>
+          <div class="table-responsive">
+            <table class="table table-striped table-hover">
+              <thead class="table-dark">
+                <tr>
+                  <th>Matrícula</th>
+                  <th>Nome</th>
+                  <th>Sobrenome</th>
+                  <th>Número de Chamada</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="tabela-alunos-disponiveis">
+                <!-- Alunos disponíveis serão carregados aqui -->
+              </tbody>
+            </table>
+          </div>
+          <div class="d-flex justify-content-center mt-3">
+            <div id="carregando-alunos" class="spinner-border text-primary" role="status" style="display: none;">
+              <span class="visually-hidden">Carregando...</span>
             </div>
-            <div class="mb-3">
-              <label for="numero_chamada" class="form-label">Número de Chamada</label>
-              <input type="number" class="form-control border border-dark rounded" id="numero_chamada" min="1" readonly>
-            </div>
-          </form>
+          </div>
         </div>
         <div class="modal-footer bg-light border-top border-dark">
           <button type="button" class="btn btn-secondary border-dark" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary border-dark" id="btn-confirmar-matricula">Confirmar Matrícula</button>
         </div>
       </div>
     </div>
@@ -349,34 +356,105 @@
         });
     }
 
-    // Função para carregar alunos para matrícula
+    // Função para carregar alunos disponíveis para matrícula
     function carregarAlunosParaMatricula(idTurma) {
+      const loadingElement = document.getElementById('carregando-alunos');
+      const tableBody = document.getElementById('tabela-alunos-disponiveis');
+      
+      loadingElement.style.display = 'block';
+      tableBody.innerHTML = '';
+      
       fetch(`../backend/listar_alunos.php?ativos=1&nao_matriculados=${idTurma}`)
         .then(response => response.json())
         .then(data => {
-          const select = document.getElementById('aluno_select');
-          select.innerHTML = '<option value="" selected disabled>Selecione um aluno...</option>';
+          loadingElement.style.display = 'none';
+          
+          if (data.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="5" class="text-center">Nenhum aluno disponível para matrícula</td></tr>';
+            return;
+          }
           
           data.forEach(aluno => {
-            const option = document.createElement('option');
-            option.value = aluno.id_alunos;
-            option.textContent = `${aluno.nome} ${aluno.sobrenome} (${aluno.matricula})`;
-            select.appendChild(option);
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td>${aluno.matricula}</td>
+              <td>${aluno.nome}</td>
+              <td>${aluno.sobrenome}</td>
+              <td>
+                <input type="number" class="form-control form-control-sm numero-chamada" 
+                       min="1" value="" data-id-aluno="${aluno.id_alunos}" required>
+              </td>
+              <td>
+                <button class="btn btn-sm btn-success btn-matricular" 
+                        data-id-aluno="${aluno.id_alunos}" 
+                        data-id-turma="${idTurma}">
+                  <i class="bi bi-plus-circle"></i> Adicionar
+                </button>
+              </td>
+            `;
+            tableBody.appendChild(tr);
           });
-
-          // Obter próximo número de chamada disponível
+          
+          // Configurar eventos para os botões de matricular
+          document.querySelectorAll('.btn-matricular').forEach(btn => {
+            btn.addEventListener('click', function() {
+              const alunoId = this.getAttribute('data-id-aluno');
+              const turmaId = this.getAttribute('data-id-turma');
+              const inputNumero = this.closest('tr').querySelector('.numero-chamada');
+              const numeroChamada = inputNumero.value;
+              
+              if (!numeroChamada) {
+                alert('Por favor, informe o número de chamada');
+                inputNumero.focus();
+                return;
+              }
+              
+              matricularAluno(alunoId, turmaId, numeroChamada);
+            });
+          });
+          
+          // Preencher números de chamada sugeridos
           fetch(`../backend/proximo_numero_chamada.php?id_turma=${idTurma}`)
             .then(response => response.json())
             .then(data => {
-              document.getElementById('numero_chamada').value = data.proximo_numero;
-            })
-            .catch(error => {
-              console.error('Erro ao obter número de chamada:', error);
+              const inputs = document.querySelectorAll('.numero-chamada');
+              let nextNumber = data.proximo_numero;
+              
+              inputs.forEach((input, index) => {
+                input.value = nextNumber + index;
+              });
             });
         })
         .catch(error => {
+          loadingElement.style.display = 'none';
           console.error('Erro ao carregar alunos:', error);
+          tableBody.innerHTML = '<tr><td colspan="5" class="text-center">Erro ao carregar alunos</td></tr>';
         });
+    }
+
+    // Função para matricular aluno
+    function matricularAluno(alunoId, turmaId, numeroChamada) {
+      fetch('../backend/matricular_aluno.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id_aluno: alunoId,
+          id_turma: turmaId,
+          numero_chamada: numeroChamada
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.erro) throw new Error(data.erro);
+        alert('Aluno matriculado com sucesso!');
+        carregarTurma(turmaId); // Recarregar dados da turma
+      })
+      .catch(error => {
+        console.error(error);
+        alert('Erro ao matricular aluno: ' + error.message);
+      });
     }
 
     // Evento quando o DOM estiver carregado
@@ -429,42 +507,7 @@
 
       // Configurar modal de matrícula
       document.getElementById('modalMatricularAluno').addEventListener('show.bs.modal', function() {
-        document.getElementById('turma_id_matricula').value = id;
         carregarAlunosParaMatricula(id);
-      });
-
-      // Configurar botão de confirmar matrícula
-      document.getElementById('btn-confirmar-matricula').addEventListener('click', function() {
-        const alunoId = document.getElementById('aluno_select').value;
-        const numeroChamada = document.getElementById('numero_chamada').value;
-        
-        if (!alunoId) {
-          alert('Por favor, selecione um aluno');
-          return;
-        }
-
-        fetch('../backend/matricular_aluno.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            id_aluno: alunoId,
-            id_turma: id,
-            numero_chamada: numeroChamada
-          })
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.erro) throw new Error(data.erro);
-          alert('Aluno matriculado com sucesso!');
-          turmaModal.hide();
-          carregarTurma(id); // Recarregar dados da turma
-        })
-        .catch(error => {
-          console.error(error);
-          alert('Erro ao matricular aluno: ' + error.message);
-        });
       });
 
       // Configurar botão de confirmar remoção
