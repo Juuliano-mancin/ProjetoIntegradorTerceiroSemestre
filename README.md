@@ -14,7 +14,19 @@
 | **Orientação**  | Professora Ana Celia Portes              |
 
 ---
-## 📄 <a href="https://github.com/Juuliano-mancin/ProjetoIntegradorTerceiroSemestre/wiki" target="_blank" style="padding: 5px 10px; background-color: #2E86C1; color: white; border-radius: 3px; text-decoration: none;">Documentação Do Projeto </a> disponível na página wiki desse repertório
+## 📄 [Documentação do Projeto](https://github.com/Juuliano-mancin/ProjetoIntegradorTerceiroSemestre/wiki/%F0%9F%8F%AB-Projeto-Integrador-3%C2%BA-Semestre) Disponivel na wiki do projeto e nos links abaixo:
+
+| Seção                        | Link                                                                                                                                         |
+|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| Primeira Release            | [🚀 Primeira Release – Módulo de Matrículas](https://github.com/Juuliano-mancin/ProjetoIntegradorTerceiroSemestre/wiki/%F0%9F%9A%80-Primeira-Release-%E2%80%90-Modulo-de-Matr%C3%ADculas) |
+| Protótipos de Telas         | [🎨 Protótipos de Telas](https://github.com/Juuliano-mancin/ProjetoIntegradorTerceiroSemestre/wiki/%F0%9F%8E%A8-Prot%C3%B3tipos-de-Telas)           |
+| Guia de Commits e Branches  | [📘 Guia de Commits e Branches](https://github.com/Juuliano-mancin/ProjetoIntegradorTerceiroSemestre/wiki/%F0%9F%93%98-Guia-de-Commits-e-Branches) |
+| Padronização de dados       | [📋 Padronização de Dados de Formulário – Integração Frontend & Backend](https://github.com/Juuliano-mancin/ProjetoIntegradorTerceiroSemestre/wiki/%F0%9F%93%8B-Padroniza%C3%A7%C3%A3o-de-Dados-de-Formul%C3%A1rio-%E2%80%93-Integra%C3%A7%C3%A3o-Frontend-&-Backend) |
+| Modelagem do Banco de Dados | [🗄️ Modelagem do Banco de Dados](https://github.com/Juuliano-mancin/ProjetoIntegradorTerceiroSemestre/wiki/%F0%9F%97%84%EF%B8%8F-Modelagem-do-Banco-de-Dados) |
+| Fluxo de Telas              | [📄 Fluxo de Telas](https://github.com/Juuliano-mancin/ProjetoIntegradorTerceiroSemestre/wiki/%F0%9F%93%84-Fluxo-de-Telas)                         |
+| Termo Abertura do Projeto   | [📄 Termo de Abertura de Projeto](https://github.com/Juuliano-mancin/ProjetoIntegradorTerceiroSemestre/wiki/%F0%9F%93%84-Termo-de-Abertura-de-Projeto) |
+| Backlog e EAP               | [📄 Backlog e Diagrama EAP](https://github.com/Juuliano-mancin/ProjetoIntegradorTerceiroSemestre/wiki/%F0%9F%93%84-Backlog-e-Diagrama-EAP)         |
+
 ---
 
 ## 🌟 Destaques  
