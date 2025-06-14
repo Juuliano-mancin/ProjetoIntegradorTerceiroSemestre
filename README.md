@@ -6,15 +6,21 @@
 **Município:** Itapira - São Paulo  
 **Projeto Integrador do 3º Semestre** - Curso de Desenvolvimento de Software Multiplataforma
 
-## 👥 Equipe de Desenvolvimento  
-- **Desenvolvedores**: Daniel Soares, David Teodoro, Juliano Mancini, Laura Brianti, Monise Jacheta  
-- **Orientação**: Profª. Ana Celia Portes
+## 👥 Equipe de Desenvolvimento
+
+| Função          | Membros                              |
+|-----------------|--------------------------------------|
+| **Desenvolvimento** | Daniel Soares, David Teodoro, Juliano Mancini, Laura Brianti, Monise Jacheta |
+| **Orientação**  | Professora Ana Celia Portes              |
+
+---
+## 📄 <a href="https://github.com/Juuliano-mancin/ProjetoIntegradorTerceiroSemestre/wiki" target="_blank" style="padding: 5px 10px; background-color: #2E86C1; color: white; border-radius: 3px; text-decoration: none;">Documentação Do Projeto </a> disponível na página wiki desse repertório
+---
 
 ## 🌟 Destaques  
-- ✨ Interface intuitiva e acessível para voluntários  
+- ✨ Interface intuitiva e acessível
 - ⚡ Digitalização dos principais processos de gestão da escola  
-- 📊 Geração de relatórios acadêmicos  
-- 💙 Código aberto e gratuito para instituições comunitárias  
+- 💙 Código aberto e gratuito
 
 ## 🛠 Tecnologias Utilizadas  
 
@@ -35,18 +41,30 @@
 - **Figma** - Prototipação das telas  
 - **Draw.io** - Diagramação de sistemas  
 
-## 📋 Funcionalidades Principais  
-- **Gestão de Usuários**: Cadastro de alunos e professores  
-- **Controle Acadêmico**: Registro diário de frequência  
-- **Planejamento Pedagógico**: Organização de aulas e conteúdos  
-- **Relatórios**: Emissão de documentos acadêmicos básicos  
-  
+## 🧩 Módulos Principais da primeira release
+
+### 👨‍🎓 Módulo de Matrículas
+
+| Funcionalidade       | Descrição                                 | Subfuncionalidades                          |
+|----------------------|-------------------------------------------|---------------------------------------------|
+| **Cadastro**         | Inclusão inicial de alunos                | Validação CPF, campos obrigatórios          |
+| **Atualização**      | Modificação de registros existentes       | Histórico de alterações, versões            |
+| **Consultas**        | Acesso às informações cadastrais          | Busca avançada, filtros personalizados      |
+
+### 🏫 Módulo de Turmas  
+
+| Funcionalidade       | Descrição                                  |
+|----------------------|-------------------------------------------|
+| **➕ Cadastro**       | Criação de novas turmas com período/série |
+| **🛠 Edição**         | Modificação de dados básicos da turma     |
+| **👥 Gerenciamento**  | Associação alunos/professores             |
+| **📅 Calendário**     | Visualização por período letivo           |
+
+### ✅ Chamadas
+
+| Função       | Descrição                     |
+|--------------|-------------------------------|
+| Registrar    | Presença/falta (dia atual)    |
+| Editar       | Ajustar registros anteriores  |
+
 ---
-
-🔗 **Licença**: [MIT](LICENSE) - Livre para uso e adaptação  
-
-*Documentação será atualizada conforme o progresso do projeto*  
-
-[⬆️ Voltar ao topo](#sistema-de-gestão-acadêmica-voluntária)  
-
-💡 **Sugestões são bem-vindas!** Ajude-nos a melhorar este projeto.
