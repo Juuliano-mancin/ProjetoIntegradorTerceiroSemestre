@@ -121,14 +121,14 @@
       </div>
     </div>
 
-    <div class="table-responsive">
+    <div class="table-responsive-lg">
       <table class="table table-striped table-hover bg-light text-dark border border-dark">
         <thead>
           <tr class="table-dark">
-            <th scope="col">Nome da Turma</th>
-            <th scope="col">Tipo</th>
+            <th scope="col" class="d-none d-sm-table-cell">Nome da Turma</th>
+            <th scope="col" class="d-none d-md-table-cell">Tipo</th>
             <th scope="col">Período</th>
-            <th scope="col">Data Criação</th>
+            <th scope="col" class="d-none d-lg-table-cell">Data Criação</th>
             <th scope="col">Alunos</th>
             <th scope="col">Status</th>
             <th scope="col">Ações</th>
@@ -292,14 +292,14 @@
         const row = document.createElement('tr');
 
         row.innerHTML = `
-          <td>
+          <td class="d-none d-sm-table-cell">
             <a href="#" class="text-primary" onclick="event.preventDefault(); carregarDetalhesTurma(${turma.id_turmas})">
               ${turma.nome_turma}
             </a>
           </td>
-          <td>${traduzirTipoTurma(turma.tipo_turma)}</td>
+          <td class="d-none d-md-table-cell">${traduzirTipoTurma(turma.tipo_turma)}</td>
           <td>${traduzirPeriodo(turma.periodo)}</td>
-          <td>${formatarData(turma.data_criacao)}</td>
+          <td class="d-none d-lg-table-cell">${formatarData(turma.data_criacao)}</td>
           <td>${turma.numero_alunos}</td>
           <td>
             <span class="badge ${turma.status === 'ativo' ? 'bg-success' : 'bg-secondary'}">
@@ -307,16 +307,18 @@
             </span>
           </td>
           <td>
-            <a href="editar_turma.html?id=${turma.id_turmas}" class="btn btn-primary btn-sm me-2" title="Editar">
-              <i class="bi bi-pencil"></i>
-            </a>
-            ${turma.status === 'ativo' 
-              ? `<button onclick="inativarTurma(${turma.id_turmas})" class="btn btn-warning btn-sm" title="Inativar">
-                   <i class="bi bi-x-circle"></i>
-                 </button>`
-              : `<button onclick="ativarTurma(${turma.id_turmas})" class="btn btn-success btn-sm" title="Ativar">
-                   <i class="bi bi-check-circle"></i>
-                 </button>`}
+            <div class="d-flex gap-1">
+              <a href="editar_turma.html?id=${turma.id_turmas}" class="btn btn-primary btn-sm" title="Editar">
+                <i class="bi bi-pencil"></i>
+              </a>
+              ${turma.status === 'ativo' 
+                ? `<button onclick="inativarTurma(${turma.id_turmas})" class="btn btn-warning btn-sm" title="Inativar">
+                     <i class="bi bi-x-circle"></i>
+                   </button>`
+                : `<button onclick="ativarTurma(${turma.id_turmas})" class="btn btn-success btn-sm" title="Ativar">
+                     <i class="bi bi-check-circle"></i>
+                   </button>`}
+            </div>
           </td>
         `;
 
