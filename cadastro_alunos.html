@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Alunos</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" />
+</head>
+
+<body class="text-white">
+    <header class="p-3">
+    <h1 class="fw-bold ms-3">Cadastro novo aluno</h1>
+  </header>
+
+  <nav class="navbar navbar-expand-lg px-3">
+    <div class="container-fluid">
+      <span class="navbar-text me-4">
+        Login: <span>Administrador</span>
+      </span>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto d-flex flex-wrap justify-content-evenly w-100">
+
+          <!-- Home -->
+          <li class="nav-item">
+            <a class="nav-link fs-5" href="page_admin.html">
+              <i class="bi bi-house-door-fill me-1"></i> Home
+            </a>
+          </li>
+
+          <!-- Alunos -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle fs-5" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <i class="bi bi-person-lines-fill me-1"></i> Alunos
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item fs-5" href="cadastro_alunos.html"><i class="bi bi-person-plus me-2"></i>Cadastro de alunos</a></li>
+              <li><a class="dropdown-item fs-5" href="listagem_alunos.html"><i class="bi bi-search me-2"></i>Consulta de alunos</a></li>
+            </ul>
+          </li>
+
+          <!-- Turmas -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle fs-5" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <i class="bi bi-diagram-3 me-1"></i> Turmas
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item fs-5" href="cadastro_turmas.html"><i class="bi bi-plus-square me-2"></i>Cadastro de turmas</a></li>
+              <li><a class="dropdown-item fs-5" href="listagem_turmas.html"><i class="bi bi-gear me-2"></i>Gerenciar turmas</a></li>
+              <li><a class="dropdown-item fs-5" href="chamada.html"><i class="bi bi-clipboard-check me-2"></i>Chamada</a></li>
+            </ul>
+          </li>
+
+          <!-- Professores -->
+          <li class="nav-item">
+            <a class="nav-link disabled fs-5" href="#"><i class="bi bi-person-vcard me-1"></i> Professores</a>
+          </li>
+
+          <!-- Planejamento -->
+          <li class="nav-item">
+            <a class="nav-link disabled fs-5" href="#"><i class="bi bi-journal-text me-1"></i> Planejamento de Aula</a>
+          </li>
+
+          <!-- Mais Opções -->
+          <li class="nav-item d-flex align-items-center">
+            <button class="btn btn-custom btn-sm fs-5" disabled>Mais Opções</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    
+    <div class="container mt-5 mb-5 p-5 rounded">
+    <form id="formCadastroAluno" action="../backend/processa_cadastro_aluno.php" method="post" class="row g-4" novalidate>
+        <div class="row align-items-stretch">
+            <div class="col-md-7 pe-3">
+                <fieldset class="rounded border border-dark h-100 mb-0 p-3">
+                    <legend class="w-auto fw-bold float-none text-dark">Informações Pessoais</legend>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label for="nome" class="form-label text-dark">Nome:</label>
+                            <input type="text" name="nome" class="form-control border border-dark rounded" id="nome" required
+                                minlength="3" maxlength="100" pattern="[A-Za-zÀ-ú\s]+">
+                            <div class="invalid-feedback">Por favor, insira um nome válido (3-100 caracteres, apenas letras).</div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="sobrenome" class="form-label text-dark">Sobrenome:</label>
+                            <input type="text" name="sobrenome" class="form-control border border-dark rounded" id="sobrenome" required
+                                minlength="3" maxlength="150" pattern="[A-Za-zÀ-ú\s]+">
+                            <div class="invalid-feedback">Por favor, insira um sobrenome válido (3-150 caracteres, apenas letras).</div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="nome_social" class="form-label text-dark">Nome Social:</label>
+                            <input type="text" name="nome_social" class="form-control border border-dark rounded" id="nome_social"
+                                maxlength="100" pattern="[A-Za-zÀ-ú\s]*">
+                            <div class="invalid-feedback">O nome social deve conter apenas letras (até 100 caracteres).</div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="genero" class="form-label text-dark">Gênero:</label>
+                            <select name="genero" class="form-select border border-dark rounded" id="genero" required>
+                                <option value="" selected disabled>Selecione...</option>
+                                <option value="nao_informado">Não informado</option>
+                                <option value="masculino">Masculino</option>
+                                <option value="feminino">Feminino</option>
+                                <option value="nao_binario">Não binário</option>
+                                <option value="transgenero">Transgênero</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                            <div class="invalid-feedback">Por favor, selecione um gênero.</div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label for="nascimento" class="form-label text-dark">Nascimento:</label>
+                            <input type="date" name="nascimento" class="form-control border border-dark rounded" id="nascimento" required
+                                max="">
+                            <div class="invalid-feedback">Por favor, insira uma data de nascimento válida.</div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label for="cpf" class="form-label text-dark">CPF:</label>
+                            <input type="text" name="cpf" class="form-control border border-dark rounded" id="cpf"
+                                placeholder="000.000.000-00" required pattern="\d{3}\.\d{3}\.\d{3}-\d{2}">
+                            <div class="invalid-feedback">Por favor, insira um CPF válido no formato 000.000.000-00.</div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label for="rg" class="form-label text-dark">RG:</label>
+                            <input type="text" name="rg" class="form-control border border-dark rounded" id="rg"
+                                placeholder="00.000.000-0" required pattern="\d{2}\.\d{3}\.\d{3}-\d{1}">
+                            <div class="invalid-feedback">Por favor, insira um RG válido no formato 00.000.000-0.</div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="telefone" class="form-label text-dark">Contato:</label>
+                            <input type="tel" name="telefone" class="form-control border border-dark rounded" id="telefone"
+                                placeholder="(00) 00000-0000" pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}">
+                            <div class="invalid-feedback">Por favor, insira um telefone válido no formato (00) 00000-0000.</div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="email" class="form-label text-dark">E-mail:</label>
+                            <input type="email" name="email" class="form-control border border-dark rounded" id="email"
+                                placeholder="usuario@gmail.com">
+                            <div class="invalid-feedback">Por favor, insira um e-mail válido.</div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="col-md-5 ps-3">
+                <div class="d-flex flex-column h-100">
+                    <fieldset class="rounded border border-dark h-100 mb-0 p-3">
+                        <legend class="w-auto fw-bold float-none text-dark">Matrícula</legend>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="tipo_matricula" class="form-label text-dark">Categoria:</label>
+                                <select name="tipo_matricula" class="form-select border border-dark rounded" id="tipo_matricula" required>
+                                    <option value="" selected disabled>Selecione...</option>
+                                    <option value="pre_vestibular">Pré-vestibular</option>
+                                    <option value="vestibulinho">Vestibulinho</option>
+                                </select>
+                                <div class="invalid-feedback">Por favor, selecione o tipo de matrícula.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="semestre" class="form-label text-dark">Semestre:</label>
+                                <select name="semestre" class="form-select border border-dark rounded" id="semestre" required>
+                                    <option value="" selected disabled>Selecione...</option>
+                                    <option value="1">1º Semestre</option>
+                                    <option value="2">2º Semestre</option>
+                                </select>
+                                <div class="invalid-feedback">Por favor, selecione o semestre.</div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="status" value="ativo">
+                    </fieldset>
+
+                    <fieldset class="rounded border border-dark h-100 mb-0 p-3 mt-4"> <legend class="w-auto fw-bold float-none text-dark">Responsável</legend>
+                        <div class="mb-4">
+                            <label for="cont_emergencia_nome" class="form-label text-dark">Nome Responsável:</label>
+                            <input type="text" name="cont_emergencia_nome" class="form-control border border-dark rounded" id="cont_emergencia_nome"
+                                maxlength="150" pattern="[A-Za-zÀ-ú\s]*">
+                            <div class="invalid-feedback">O nome deve conter apenas letras (até 150 caracteres).</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="cont_emergencia_relacao" class="form-label text-dark">Relacionamento:</label>
+                                <select name="cont_emergencia_relacao" class="form-select border border-dark rounded" id="cont_emergencia_relacao">
+                                    <option value="nenhum">Nenhum</option>
+                                    <option value="pai_mae">Pai/Mãe</option>
+                                    <option value="parentesco_proximo">Parentesco Próximo</option>
+                                    <option value="outros">Outros</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="cont_emergencia_contato" class="form-label text-dark">Contato:</label>
+                                <input type="tel" name="cont_emergencia_contato" class="form-control border border-dark rounded" id="cont_emergencia_contato"
+                                    placeholder="(00) 00000-0000" pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}">
+                                <div class="invalid-feedback">Por favor, insira um telefone válido no formato (00) 00000-0000.</div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            
+        </div> <fieldset class="rounded border border-dark h-100 mb-0 p-3 mt-4">
+    <legend class="w-auto fw-bold float-none text-dark">Localização</legend>
+    <div class="row">
+        <div class="col-md-2 mb-3">
+            <label for="cep" class="form-label text-dark">CEP:</label>
+            <input type="text" name="cep" class="form-control border border-dark rounded" id="cep"
+                placeholder="00000-000" pattern="\d{5}-\d{3}">
+            <div class="invalid-feedback">Por favor, insira um CEP válido no formato 00000-000.</div>
+        </div>
+        <div class="col-md-5 mb-3">
+            <label for="logradouro" class="form-label text-dark">Logradouro:</label>
+            <input type="text" name="logradouro" class="form-control border border-dark rounded" id="logradouro" required
+                maxlength="200">
+            <div class="invalid-feedback">Por favor, insira o logradouro.</div>
+        </div>
+        <div class="col-md-2 mb-3">
+            <label for="numero" class="form-label text-dark">Número:</label>
+            <input type="text" name="numero" class="form-control border border-dark rounded" id="numero"
+                maxlength="10">
+        </div>
+        <div class="col-md-3 mb-3">
+            <label for="complemento" class="form-label text-dark">Complemento:</label>
+            <input type="text" name="complemento" class="form-control border border-dark rounded" id="complemento"
+                maxlength="150">
+        </div>
+        <div class="col-md-3 mb-3">
+            <label for="bairro" class="form-label text-dark">Bairro:</label>
+            <input type="text" name="bairro" class="form-control border border-dark rounded" id="bairro" maxlength="100">
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="cidade" class="form-label text-dark">Cidade:</label>
+            <input type="text" name="cidade" class="form-control border border-dark rounded" id="cidade" maxlength="100">
+        </div>
+        <div class="col-md-3 mb-3">
+            <label for="uf" class="form-label text-dark">Estado:</label>
+            <select name="uf" class="form-select border border-dark rounded" id="uf" required>
+                <option value="">Selecione o Estado</option>
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Distrito Federal</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+                <option value="MT">Mato Grosso</option>
+                <option value="MS">Mato Grosso do Sul</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="PA">Pará</option>
+                <option value="PB">Paraíba</option>
+                <option value="PR">Paraná</option>
+                <option value="PE">Pernambuco</option>
+                <option value="PI">Piauí</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RN">Rio Grande do Norte</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="RO">Rondônia</option>
+                <option value="RR">Roraima</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SP">São Paulo</option>
+                <option value="SE">Sergipe</option>
+                <option value="TO">Tocantins</option>
+            </select>
+            <div class="invalid-feedback">Por favor, selecione um estado.</div>
+        </div>
+    </div>
+</fieldset>
+
+        <div class="col-12 mt-4 d-flex justify-content-end">
+            <button class="btn btn-outline-primary px-5 py-2 bg-primary text-white" type="submit" id="btnSalvar">
+                <i class="bi bi-save me-2"></i>Cadastrar Aluno
+            </button>
+        </div>
+    </form>
+</div>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Scripts de validação -->
+    <script>
+        // Validação do formulário
+        (function() {
+            'use strict';
+            
+            // Pegar todos os formulários que queremos aplicar estilos de validação personalizados
+            const forms = document.querySelectorAll('.needs-validation');
+            
+            // Loop sobre eles e evitar envio
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    
+                    form.classList.add('was-validated');
+                }, false);
+            });
+            
+            // Máscaras para campos formatados
+            document.getElementById('cpf').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+                e.target.value = value;
+            });
+            
+            document.getElementById('rg').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                value = value.replace(/(\d{2})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d{1})$/, '$1-$2');
+                e.target.value = value;
+            });
+            
+            document.getElementById('telefone').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+                value = value.replace(/(\d)(\d{4})$/, '$1-$2');
+                e.target.value = value;
+            });
+            
+            document.getElementById('cont_emergencia_contato').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+                value = value.replace(/(\d)(\d{4})$/, '$1-$2');
+                e.target.value = value;
+            });
+            
+            document.getElementById('cep').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                value = value.replace(/^(\d{5})(\d)/, '$1-$2');
+                e.target.value = value;
+            });
+            
+            // Limitar data de nascimento para não ser no futuro
+            document.getElementById('nascimento').max = new Date().toISOString().split('T')[0];
+            
+            // Buscar CEP via API
+            document.getElementById('cep').addEventListener('blur', function(e) {
+                const cep = e.target.value.replace(/\D/g, '');
+                
+                if (cep.length === 8) {
+                    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (!data.erro) {
+                                document.getElementById('logradouro').value = data.logradouro;
+                                document.getElementById('bairro').value = data.bairro;
+                                document.getElementById('cidade').value = data.localidade;
+                                document.getElementById('uf').value = data.uf;
+                            }
+                        })
+                        .catch(error => console.error('Erro ao buscar CEP:', error));
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
