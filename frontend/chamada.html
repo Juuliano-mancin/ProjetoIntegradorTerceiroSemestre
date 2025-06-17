@@ -350,10 +350,13 @@
       }
 
       // Formatador de data para exibição
-      function formatarData(dataString) {
-        const data = new Date(dataString);
-        return data.toLocaleDateString('pt-BR');
-      }
+      function formatarData(data) {
+  const partes = data.split('-'); // espera "YYYY-MM-DD"
+  const ano = partes[0];
+  const mes = partes[1];
+  const dia = partes[2];
+  return `${dia}/${mes}/${ano}`;
+}
 
       // Filtro de data
       btnFiltrar.addEventListener('click', () => {

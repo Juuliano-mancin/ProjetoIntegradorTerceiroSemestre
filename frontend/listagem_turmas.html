@@ -170,7 +170,11 @@
 
     // Função para formatar data
     function formatarData(data) {
-      return new Date(data).toLocaleDateString('pt-BR');
+      const partes = data.split('-'); // espera "YYYY-MM-DD"
+      const ano = partes[0];
+      const mes = partes[1];
+      const dia = partes[2];
+      return `${dia}/${mes}/${ano}`;
     }
 
     // Função para traduzir tipo de turma
