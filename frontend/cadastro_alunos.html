@@ -368,7 +368,103 @@
                         .catch(error => console.error('Erro ao buscar CEP:', error));
                 }
             });
+            // Função para calcular idade a partir da data de nascimento
+function calcularIdade(dataNascimento) {
+    const hoje = new Date();
+    const nascimento = new Date(dataNascimento);
+    let idade = hoje.getFullYear() - nascimento.getFullYear();
+    const mes = hoje.getMonth() - nascimento.getMonth();
+    if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+        idade--;
+    }
+    return idade;
+}
+
+// Validação de CPF (formato e dígitos repetidos)
+function validarCPF(cpf) {
+    cpf = cpf.replace(/\D/g, '');
+    if (/^(\d)\1{10}$/.test(cpf)) return false; // Sequência repetida
+    // Aqui você pode adicionar validação de dígitos verificadores se quiser
+    return true;
+}
+
+// Validação de RG (formato e dígitos repetidos)
+function validarRG(rg) {
+    rg = rg.replace(/\D/g, '');
+    if (/^(\d)\1{8}$/.test(rg)) return false; // Sequência repetida
+    return true;
+}
+
+// Validação customizada ao enviar o formulário
+document.getElementById('formCadastroAluno').addEventListener('submit', function(e) {
+    const form = this;
+    const nascimento = document.getElementById('nascimento').value;
+    const idade = calcularIdade(nascimento);
+    const responsavelNome = document.getElementById('cont_emergencia_nome').value;
+    const responsavelContato = document.getElementById('cont_emergencia_contato').value;
+    const cpf = document.getElementById('cpf').value;
+    const rg = document.getElementById('rg').value;
+
+    // Resetar mensagens de erro
+    document.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+    
+    // Validar se o formulário é válido (validação HTML5)
+    if (!form.checkValidity()) {
+        e.preventDefault();
+        e.stopPropagation();
+        form.classList.add('was-validated');
+        return;
+    }
+
+    // Validar idade
+    if (idade < 13) {
+        e.preventDefault();
+        document.getElementById('nascimento').classList.add('is-invalid');
+        document.getElementById('nascimento').nextElementSibling.textContent = 
+            'Aluno deve ter pelo menos 13 anos de idade.';
+        form.classList.add('was-validated');
+        return;
+    }
+
+    // Validar responsável para menores de 18 anos
+    if (idade < 18 && (!responsavelNome || !responsavelContato)) {
+        e.preventDefault();
+        if (!responsavelNome) {
+            document.getElementById('cont_emergencia_nome').classList.add('is-invalid');
+            document.getElementById('cont_emergencia_nome').nextElementSibling.textContent = 
+                'Dados do responsável são obrigatórios para menores de 18 anos.';
+        }
+        if (!responsavelContato) {
+            document.getElementById('cont_emergencia_contato').classList.add('is-invalid');
+            document.getElementById('cont_emergencia_contato').nextElementSibling.textContent = 
+                'Contato do responsável é obrigatório para menores de 18 anos.';
+        }
+        form.classList.add('was-validated');
+        return;
+    }
+
+    // Validar CPF completo (11 dígitos com máscara)
+    if (cpf.replace(/\D/g, '').length !== 11) {
+        e.preventDefault();
+        document.getElementById('cpf').classList.add('is-invalid');
+        document.getElementById('cpf').nextElementSibling.textContent = 
+            'CPF deve conter 11 dígitos.';
+        form.classList.add('was-validated');
+        return;
+    }
+
+    // Validar RG completo (9 dígitos com máscara)
+    if (rg.replace(/\D/g, '').length < 8) { // RG pode ter 8 ou 9 dígitos
+        e.preventDefault();
+        document.getElementById('rg').classList.add('is-invalid');
+        document.getElementById('rg').nextElementSibling.textContent = 
+            'RG deve conter pelo menos 8 dígitos.';
+        form.classList.add('was-validated');
+        return;
+    }
+});
         })();
+        
     </script>
 </body>
 </html>
